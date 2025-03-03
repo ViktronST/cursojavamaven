@@ -5,3 +5,41 @@ java.io.IOException: El sistema no puede encontrar la ruta especificada
 	at java.base/java.io.WinNTFileSystem.createFileExclusively(Native Method)
 	at java.base/java.io.File.createNewFile(File.java:1043)
 	at es.cursojava.ficheros.EmpezandoConFicheros.main(EmpezandoConFicheros.java:48)
+2025-03-03 19:14:55 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Introduce 5 nombres de archivos:
+2025-03-03 19:15:12 [main] ERROR e.c.f.e.ejercicio1.Ejercicio1 - Archivo creado: C:\Users\Tardes\Ficheros\Imágenes\imagen.png
+2025-03-03 19:28:03 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Introduce 5 nombres de archivos:
+2025-03-03 19:28:35 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Introduce 5 nombres de archivos:
+2025-03-03 19:36:42 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Imagen imagenvik.gif creado en C:\Users\Tardes\Ficheros\Imágenes
+2025-03-03 19:39:51 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero gallo.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 19:40:28 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero vaca.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 19:40:39 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero cerdo.xml creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 19:40:45 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero rana.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 19:40:51 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero elefante.otx creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 19:41:06 [main] INFO  e.c.f.e.ejercicio1.Ejercicio1 - Fichero gato.xml creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:37:57 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Imagen Imagen.jpg creado en C:\Users\Tardes\Ficheros\Imágenes
+2025-03-03 20:38:02 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Documento Documento.pdf creado en C:\Users\Tardes\Ficheros\Documentos
+2025-03-03 20:38:06 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero vaca.xml creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:38:18 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero rana.html creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:38:32 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero lobo.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:38:32 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_1.doc
+2025-03-03 20:38:32 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_2.html
+2025-03-03 20:38:32 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_3.xml
+2025-03-03 20:40:08 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - 	Imagen Imagen1.gif creado en C:\Users\Tardes\Ficheros\Imágenes
+2025-03-03 20:40:23 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - 	Documento fichero.txt creado en C:\Users\Tardes\Ficheros\Documentos
+2025-03-03 20:40:30 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - 	Fichero perro.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:40:36 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - 	Fichero leon.xml creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - 	Fichero lagarto.html creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_1.html
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_2.xml
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_3.doc
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_4.doc
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_5.html
+2025-03-03 20:40:48 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_6.xml
+2025-03-03 20:45:36 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Imagen imagen.jpg creado en C:\Users\Tardes\Ficheros\Imágenes
+2025-03-03 20:45:41 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Documento documento.txt creado en C:\Users\Tardes\Ficheros\Documentos
+2025-03-03 20:45:46 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero vaca.xml creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:45:50 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero rana.html creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:45:58 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Fichero duban.doc creado en C:\Users\Tardes\Ficheros\Otros
+2025-03-03 20:45:58 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_1.doc
+2025-03-03 20:45:58 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_2.html
+2025-03-03 20:45:58 [main] INFO  e.c.ficheros.ejercicios.Ejercicio1 - Archivo renombrado: Viktor_3.xml
