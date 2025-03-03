@@ -9,10 +9,10 @@ import es.cursojava.poo.bar2.interfaz.Cafeteable;
 public abstract class ClienteCafetero extends Cliente implements Cafeteable{
 
     public ClienteCafetero(String nombre) {
-            super(nombre);
-        }
-    
-        @Override
+        super(nombre);
+    }
+
+    @Override
     public void tomarCarfe(TazaCafe taza) throws TooHotTemperatureException, TooColdTemperatureException {
         System.out.println("El cliente " + this.getNombre() + " se va a tomar un café...");
         System.out.println("El café está a " + taza.getTemperatura() + " grados.");

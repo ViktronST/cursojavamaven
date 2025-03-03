@@ -37,7 +37,7 @@ public class MainBar2 {
 	public void servirCafe(Cafeteable[] clientes) {
 		
 		for (Cafeteable cliente : clientes) {
-			TazaCafe taza = new TazaCafe("Arabigo");
+			TazaCafe taza = new TazaCafe("Arabigo",50);
 			try {
 				cliente.tomarCafe(taza);
 			} catch (TooHotTemperatureException e) {

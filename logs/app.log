@@ -1,2 +1,7 @@
 2025-02-27 18:28:08 [main] WARN  es.cursojava.inicio.Main - Warn Hello world2!
 2025-02-27 18:28:08 [main] ERROR es.cursojava.inicio.Main - Error Hello world2!
+2025-03-03 17:50:47 [main] ERROR e.c.ficheros.EmpezandoConFicheros - Error al crear el fichero C:\Users\Tardes\Ficherossss\fichero2.txt: El sistema no puede encontrar la ruta especificada
+java.io.IOException: El sistema no puede encontrar la ruta especificada
+	at java.base/java.io.WinNTFileSystem.createFileExclusively(Native Method)
+	at java.base/java.io.File.createNewFile(File.java:1043)
+	at es.cursojava.ficheros.EmpezandoConFicheros.main(EmpezandoConFicheros.java:48)

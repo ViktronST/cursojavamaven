@@ -5,5 +5,5 @@ import es.cursojava.poo.bar2.excepcion.hija.TooColdTemperatureException;
 import es.cursojava.poo.bar2.excepcion.hija.TooHotTemperatureException;
 
 public interface Cafeteable {
-    void tomarCarfe(TazaCafe taza) throws TooHotTemperatureException, TooColdTemperatureException;
+    void tomarCafe(TazaCafe taza) throws TooHotTemperatureException, TooColdTemperatureException;
 }
