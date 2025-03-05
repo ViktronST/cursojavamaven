@@ -1,6 +1,6 @@
 package es.cursojava.poo.cinefilos;
 
-import es.cursojava.inicio.funciones.Utilidades;
+import es.cursojava.utiles.Utilidades;
 
 public class PruebaCine {
     public static void main(String[] args) {

@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import es.cursojava.inicio.excepciones.ejercicios.ejercicio1.NotaInvalidaExcepcion;
-import es.cursojava.inicio.funciones.Utilidades;
 import es.cursojava.poo.centroeducativo.Alumno;
+import es.cursojava.utiles.Utilidades;
 
 public class MainAlumnos {
     public static void main(String[] args) {

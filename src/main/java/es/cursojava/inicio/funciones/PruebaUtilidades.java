@@ -1,5 +1,7 @@
 package es.cursojava.inicio.funciones;
 
+import es.cursojava.utiles.Utilidades;
+
 public class PruebaUtilidades {
 
 	public static void main(String[] args) {

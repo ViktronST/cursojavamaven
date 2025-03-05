@@ -1,5 +1,7 @@
 package es.cursojava.inicio.funciones;
 
+import es.cursojava.utiles.Utilidades2;
+
 public class MenuUtilidades {
     public static void main(String[] args) {
     	
