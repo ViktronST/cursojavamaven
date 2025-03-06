@@ -15,7 +15,7 @@ public class Ejercicio3 {
         String[] asignaturas = crearAsignaturas();
         List<Alumno> alumnos = crearAlumnos(asignaturas);
         mostrarAlumnos(alumnos, asignaturas);
-        crearArchivoAlumno(alumnos, "./recursos/ficha_alumnado");
+        crearArchivoAlumno(alumnos, "./recursos/ficha_alumnado.txt");
     }
 
     private static String[] crearAsignaturas() {
