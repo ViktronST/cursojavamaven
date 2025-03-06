@@ -29,11 +29,11 @@ public class Ejercicio3Corregido {
                 + " | Nota Media: " + alumno.getNotaMedia() + " | Email: " + alumno.getEmail() 
                 + " | Asignaturas: " + Arrays.toString(alumno.getAsignaturas()) + "\n";
                 
-                String asignaturas = "";
-                for (String asignatura : alumno.getAsignaturas()) {
-                   asignaturas += asignatura + ","; 
-                }
-                contenido += asignaturas;
+                // String asignaturas = "";
+                // for (String asignatura : alumno.getAsignaturas()) {
+                //    asignaturas += asignatura + ","; 
+                // }
+                // contenido += asignaturas;
 
                 Files.write(ruta, contenido.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
             }
