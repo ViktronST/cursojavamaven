@@ -37,7 +37,7 @@ public class ArchivoServicio {
 
 			buffer.println("Hola que tal amigos!");
 			buffer.println("Todo bien? yo acá escribiendo un archivo...");
-			buffer.printf("Hasta luego %s! %s", "JoseLuis5", "Cadena");
+			buffer.printf("Hasta luego %s! %s", "ViktorST", "Cadena");
 			// buffer.close();
 			System.out.println("El archivo se ha creado con éxito!");
 		} catch (IOException e) {

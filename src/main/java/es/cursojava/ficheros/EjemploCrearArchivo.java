@@ -34,7 +34,7 @@ public class EjemploCrearArchivo {
 
         ArchivoServicio service = new ArchivoServicio();
         //service.mostrarContenidoDirectorio("C:\\Users\\Tardes\\");
-        service.crearArchivo(nombreArchivo);
+        service.crearArchivo2(nombreArchivo);
         System.out.println(nombreArchivo);
     }
 }
