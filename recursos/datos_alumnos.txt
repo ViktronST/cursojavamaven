@@ -1,0 +1,1 @@
+Nombre: N3 | Apellido: A3 | Edad: 23 | Nota Media: 3.0 | Email: ASD3 | Asignaturas: A1, A2, A3

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class UtilidadesFicheros {
     private static final Logger logger = LoggerFactory.getLogger(UtilidadesFicheros.class);
+    public static final String SEPARADOR_PIPE = " | ";
 
     // Como se repite el código en los 2 métodos, hacemos que uno llame al otro.
     // Para convertir un Array de Strings en una lista utilizamos el Arrays.asList()
@@ -27,5 +28,7 @@ public class UtilidadesFicheros {
             }
         }
     }
+
+    
 
 }
