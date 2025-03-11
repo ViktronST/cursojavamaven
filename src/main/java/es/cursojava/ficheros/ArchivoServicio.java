@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class ArchivoServicio {
 
+	// ======================CREAR ARCHIVO======================
 	public void crearArchivo(String nombre) {
 		File archivo = new File(nombre);
 		try (BufferedWriter buffer = new BufferedWriter(new FileWriter(archivo, true))) {
@@ -45,21 +46,16 @@ public class ArchivoServicio {
 		}
 	}
 
-	public String leerArchivo(String nombre) throws IOException {
+	// ======================LEER ARCHIVO======================
+	public String leerArchivo(String nombre) throws IOException{
 		StringBuilder sb = new StringBuilder();
 		File archivo = new File(nombre);
-//		FileReader fileReader = new FileReader(archivo);
-//		BufferedReader reader = new BufferedReader(fileReader);
-//
-//		String linea;
-//		while ((linea = reader.readLine()) != null) {
-//			sb.append(linea).append("\n");
-//		}
 
+		// try-catch with resources
         try (BufferedReader reader = new BufferedReader(new FileReader(archivo))){
 
-            String linea;
-            while ( (linea = reader.readLine()) != null){
+            String linea;	// Va a tener todo el conetnido.
+            while ( (linea = reader.readLine()) != null){	// Si readLine devuelve null, se ha llegado al final del fichero.
                 sb.append(linea).append("\n");
             }
         } catch (IOException e) {
@@ -68,13 +64,28 @@ public class ArchivoServicio {
 		return sb.toString();
 	}
 
+	public String leerArchivo1(String nombre) throws IOException{
+		StringBuilder sb = new StringBuilder();
+		File archivo = new File(nombre);
+		FileReader fileReader = new FileReader(archivo);
+		BufferedReader reader = new BufferedReader(fileReader);
+
+		String linea;
+		while ((linea = reader.readLine()) != null) {
+			sb.append(linea).append("\n");
+		}
+		return sb.toString();
+	}
+
 	public String leerArchivo2(String nombre) {
 		StringBuilder sb = new StringBuilder();
 		File archivo = new File(nombre);
+		
+		// Lectura con Scanner.
 		try (Scanner s = new Scanner(archivo)) {
 
-			s.useDelimiter("\n");
-			while (s.hasNext()) {
+			s.useDelimiter("\n"); // Aunque no se vean, todas las líneas tienen \n, aquí lo usamos para delimitar la línea.
+			while (s.hasNext()) { // Mientras haya siguiente línea, seguirá leyendo.
 				sb.append(s.next()).append("\n");
 			}
 
@@ -88,7 +99,8 @@ public class ArchivoServicio {
 		Path path = Paths.get(nombre);
 		StringBuilder sb = new StringBuilder();
 
-		List<String> lines = Files.readAllLines(path);
+		// Lectura con clase Files y .readAllLines.
+		List<String> lines = Files.readAllLines(path); // Tenemos que pasarle la ruta para que pueda leer el fichero.
 		for (String linea : lines) {
 			sb.append(linea+"\n");
 		}
@@ -96,6 +108,7 @@ public class ArchivoServicio {
 		return sb.toString();
 	}
 
+	// =================MOSTRAR CONTENIDO DIRECTORIO=================
 	public void mostrarContenidoDirectorio(String directorio) {
 		File dir = new File(directorio);
 		File file1 = new File(directorio, "fichero1.txt");
