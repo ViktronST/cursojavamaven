@@ -4,18 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import es.cursojava.ficheros.ArchivoServicio;
-
 public class Ejercicio4 {
     public static void main(String[] args) {
-        // ArchivoServicio servicio = new ArchivoServicio();
-
         String rutaArchivo = "D:\\ficheros\\Quijote.txt";
-        // String nombre = "Qhijote";
         String[] palabrasClave = {"Quijote", "Dulcinea", "Sancho"};
         
         int totalLineas = 0;
-        // int contadorNombre = 0;
         int[] contadorPalabras = new int[palabrasClave.length];
         
         try (BufferedReader reader = new BufferedReader(new FileReader(rutaArchivo))) {
@@ -35,16 +29,6 @@ public class Ejercicio4 {
             System.out.println("Apariciones de " + palabrasClave[i] + ": " + contadorPalabras[i]);
         }
     }
-    
-    // private static int contarApariciones(String linea) {
-    //     int contador = 0;
-    //     int indice = linea.indexOf("Quijote");
-    //     while (indice != -1) {
-    //         contador++;
-    //         indice = linea.indexOf("Quijote", indice + 7);
-    //     }
-    //     return contador;
-    // }
 
     private static int contarAparicionesNombres(String linea, String palabra) {
         int contador = 0;
