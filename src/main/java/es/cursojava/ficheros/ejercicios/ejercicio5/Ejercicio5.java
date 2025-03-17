@@ -2,9 +2,12 @@ package es.cursojava.ficheros.ejercicios.ejercicio5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,9 +22,11 @@ public class Ejercicio5 {
     public static void main(String[] args) {
         Map<String, List<Evento>> mapa = cargarEventosFichero("D:\\ficheros\\eventos.txt", 1);
         pintaMapa(mapa);
-        
-        //eventosPorCiudad(mapa);
-
+        try {
+            eventosPorCiudad(mapa);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         eventosGratuitoPorCiudad(mapa);
     }
 
@@ -39,20 +44,21 @@ public class Ejercicio5 {
         System.out.println("Terminar");
     }
 
-    // private static void eventosPorCiudad (Map<String, List<Evento>> mapa) {
-    //     Set<String> ciudades = mapa.keySet();
-    //     for (String ciudad : ciudades) {
-    //         Path ruta = Paths.get("./ciudades/" + ciudad + ".txt");
+    private static void eventosPorCiudad (Map<String, List<Evento>> mapa) throws IOException {
+        Set<String> ciudades = mapa.keySet();
+        for (String ciudad : ciudades) {
+            Path ruta = Paths.get("./ciudades/" + ciudad + ".txt");
 
-    //         List<Evento> eventosCiudad = mapa.get(ciudad);
-    //         System.out.println("Ciudad: " + ciudad + " con " + eventosCiudad.size());
-    //         StringBuilder sb = new StringBuilder();
-    //         for (Evento evento : eventosCiudad) {
-    //             sb.append(evento.getNombre() + "\n");
-    //         }
-    //         Files.write(ruta, sb.toString().getBytes());
-    //     }
-    // }
+            List<Evento> eventosCiudad = mapa.get(ciudad);
+            System.out.println("Ciudad: " + ciudad + " con " + eventosCiudad.size());
+            StringBuilder sb = new StringBuilder();
+            for (Evento evento : eventosCiudad) {
+                sb.append(evento.getNombre() + "\n");
+            }
+            Files.write(ruta, sb.toString().getBytes(StandardCharsets.UTF_8),
+                StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+        }
+    }
 
     private static void pintaMapa (Map<String, List<Evento>> mapa) {
         Set<String> ciudades = mapa.keySet();
