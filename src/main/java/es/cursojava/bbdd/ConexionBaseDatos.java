@@ -18,17 +18,17 @@ public class ConexionBaseDatos {
 		String username = "lordvik";
 		String password = "password";
 
-		
-
-		try  {
+		try (Connection connection = DriverManager.getConnection(url_oracle);) {
 			// Class.forName("oracle.jdbc.driver.OracleDriver");    // Esto es para librarias mas antiguas.
 			
-            Connection connection = DriverManager.getConnection(url_oracle);
-            //Connection connection = DriverManager.getConnection(url_oracle2, username, password);
+            // Connection connection = DriverManager.getConnection(url_oracle);	// Implementa AutoCloseable, por lo que podemos meterlo en el try-catch with resources
+            // Connection connection = DriverManager.getConnection(url_oracle2, username, password);
 
 			if (connection!=null) {
 				System.out.println("Conexion establecida");
 			}
+			
+			// connection.close();
 
 		} catch (SQLException e) {  // Excepcion que viene de Connection.
 			System.err.println("Ha habido un error " + e.getMessage());
@@ -48,7 +48,7 @@ public class ConexionBaseDatos {
 
         Connection connection = null;
 		try {
-			OracleDataSource ods = new OracleDataSource();
+			OracleDataSource ods = new OracleDataSource();	// NO implementa AutoCloseable, por lo que no podemos meterlo en el try-catch with resources
 			ods.setURL(url_oracle);
 			
 			connection = ods.getConnection();
@@ -65,9 +65,27 @@ public class ConexionBaseDatos {
                 e.printStackTrace();
             }
         }
+	}
 
+	private static void conectaOracle3() {
+		String url_oracle = "jdbc:oracle:thin:lordvik/password@10.2.1.10:1522:XE";
+		String url_oracle2 = "jdbc:oracle:thin:@10.2.1.10:1522:XE";
+		String username = "lordvik";
+		String password = "password";
 
-
+		try {
+			OracleDataSource ods = new OracleDataSource();	// NO implementa AutoCloseable, por lo que no podemos meterlo en el try-catch with resources
+			try (Connection connection = ods.getConnection()) {
+				ods.setURL(url_oracle);
+				if (connection!=null) {
+					System.out.println("Conexion establecida");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 
