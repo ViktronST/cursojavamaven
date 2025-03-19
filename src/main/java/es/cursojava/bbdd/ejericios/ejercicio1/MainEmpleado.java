@@ -17,6 +17,8 @@ public class MainEmpleado {
         MainEmpleado empleado = new MainEmpleado();
         empleado.mostrarEmpleado();
         empleado.crearListaEmpleados();
+        empleado.pedirEdadEmpleado();
+        empleado.mostrarEdadEmpleado();
     }
 
     private void mostrarEmpleado() {
@@ -35,9 +37,9 @@ public class MainEmpleado {
                 Date fechaContratacion = rs.getDate("fecha_contratacion");
                 int equipoId = rs.getInt("equipo_id");
 
-                System.out.println("\nRegistro [\n\tID: " + id + ", \n\tNombre: " + nombre + ", \n\tEdad: " + edad + ", \n\tSalario: " + salario 
-                                    + ", \n\tDepartamento_ID: " + departamentoId + ", \n\tFecha de contratacion: " + fechaContratacion 
-                                    + ", \n\tEquipo_ID: " + equipoId + "]");
+                System.out.println("\nRegistro [\n\tID: " + id + ", \n\tNombre: " + nombre + ", \n\tEdad: " + edad 
+                                    + ", \n\tSalario: " + salario + ", \n\tDepartamento_ID: " + departamentoId 
+                                    + ", \n\tFecha de contratacion: " + fechaContratacion + ", \n\tEquipo_ID: " + equipoId + "]");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,8 +93,13 @@ public class MainEmpleado {
         System.out.println(listaEmpleados.size());
     }
 
-    private void edadEmpleado() {
+    private int pedirEdadEmpleado() {
         Utilidades2.pideDatoNumerico("Introduzca una edad: ");
+        return edad;
+    }
+
+    private void mostrarEdadEmpleado() {
+        
 
     }
 }
