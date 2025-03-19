@@ -18,7 +18,7 @@ public class ConsultaBaseDatos {
         ResultSet rs = null;
         try {
             st = conexion.createStatement();
-            rs = st.executeQuery(CONSULTA_EMPLEADOS_SALARIO);
+            rs = st.executeQuery(CONSULTA_EMPLEADOS_SALARIO);   // .executeQuery() ejecuta la consulta.
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
