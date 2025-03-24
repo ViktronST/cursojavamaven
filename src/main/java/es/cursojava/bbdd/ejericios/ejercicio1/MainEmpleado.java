@@ -6,17 +6,34 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import es.cursojava.utiles.UtilidadesBD;
 
 public class MainEmpleado {
     private static final String CONSULTA_EMPLEADOS = "SELECT * FROM empleados";
+
+    private static final String CONSULTA_EDAD_EMPLEADOS = "SELECT ID, NOMBRE, EDAD, SALARIO, FECHA_CONTRATACION FROM EMPLEADOS";
+
+    private static final String CONSULTA_EQUIPO_EMPLEADOS = "SELECT e.nombre AS nombre_empleado, eq.nombre AS nombre_equipo" +
+                                                            " FROM empleados e" +
+                                                            " JOIN equipos_trabajo eq ON e.equipo_id = eq.id";
+
+    private static final String CONSULTA_EQUIPO_Y_EMPLEADOS = "SELECT e.id AS id_empleado, e.nombre AS nombre_empleado, e.edad, e.salario," + 
+                                                            " e.departamento_id, e.fecha_contratacion, e.equipo_id," + 
+                                                            " eq.id AS id_equipo_trabajo, eq.nombre AS nombre_equipo, eq.fecha_creacion" + 
+                                                            " FROM empleados e" + 
+                                                            " JOIN equipos_trabajo eq ON e.equipo_id = eq.id";
+
+                                                        
     public static void main(String[] args) {
         MainEmpleado empleado = new MainEmpleado();
         empleado.mostrarEmpleado();
         empleado.crearListaEmpleados();
         empleado.consultaEmpleadoEdad(0,0);
+        empleado.crearMapa();
     }
 
     private void mostrarEmpleado() {
@@ -88,6 +105,7 @@ public class MainEmpleado {
             }
         }
 
+        System.out.println("==============================================================");
         System.out.println(listaEmpleados.size());
     }
 
@@ -99,7 +117,7 @@ public class MainEmpleado {
         ResultSet rs = null;
         try {
             st = conexion.createStatement();
-            String query = CONSULTA_EMPLEADOS + " WHERE 1=1 ";
+            String query = CONSULTA_EDAD_EMPLEADOS + " WHERE 1=1 ";
 
             if (edadConsultada!=0){
                 query+= " AND EDAD>"+edadConsultada;
@@ -136,6 +154,117 @@ public class MainEmpleado {
             }
         }
 
+        System.out.println("==============================================================");
+        System.out.println("Num empleados: " + empleados.size());
+
         return empleados;
     }
+
+    private Map<String, List<Empleado>> crearMapa() {
+        Map<String, List<Empleado>> mapaEmpleados = new HashMap<>();
+
+        Connection conexion = UtilidadesBD.crearConexion();
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = conexion.createStatement();
+            rs = st.executeQuery(CONSULTA_EQUIPO_EMPLEADOS);
+    
+            while (rs.next()) {
+                String nombreEquipo = rs.getString("NOMBRE_EQUIPO");
+                String nombreEmpleado = rs.getString("NOMBRE_EMPLEADO");
+
+                // De esta manera NO nos sirve, ya que solo guarda el último empleado por culpa del 'new ArrayList<>()'.
+                //mapaEmpleados.put(nombreEquipo, new ArrayList<>());
+
+                mapaEmpleados.putIfAbsent(nombreEquipo, new ArrayList<>());
+    
+                mapaEmpleados.get(nombreEquipo).add(new Empleado(nombreEmpleado));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            UtilidadesBD.cerrarConexion(conexion);
+            try {
+                st.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("==============================================================");
+        for (String equipo : mapaEmpleados.keySet()) {
+            List<Empleado> empleados = mapaEmpleados.get(equipo);
+    
+            System.out.print("Nombre Equipo: " + equipo + " - Número Empleados: " + empleados.size() + " - Empleados: ");
+    
+            for (Empleado emp : empleados) {
+                System.out.print(emp.getNombre() + ", ");
+            }
+            System.out.println();
+        }
+        
+        return mapaEmpleados;
+    }
+    
+    // = = = = = = = = MAPA CON TODOS LOS DATOS DE LA TABLA EQUIPO Y EMPLEADO = = = = = = = = 
+    private Map<List<Equipo>, List<Empleado>> crearMapa2() {
+        Map<List<Equipo>, List<Empleado>> mapaEmpleados = new HashMap<>();
+
+        Connection conexion = UtilidadesBD.crearConexion();
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = conexion.createStatement();
+            rs = st.executeQuery(CONSULTA_EQUIPO_EMPLEADOS);
+    
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombreEmpleado = rs.getString("NOMBRE_EMPLEADO");
+                int edad = rs.getInt("edad");
+                double salario = rs.getDouble("salario");
+                int departamentoId = rs.getInt("departamento_id");
+                Date fechaContratacion = rs.getDate("fecha_contratacion");
+                int equipoId = rs.getInt("equipo_id");
+
+                
+                String nombreEquipo = rs.getString("NOMBRE_EQUIPO");
+                
+
+                // mapaEmpleados.put(nombreEquipo, new ArrayList<>()); 
+
+                mapaEmpleados.putIfAbsent(new ArrayList<>(), new ArrayList<>());
+    
+                mapaEmpleados.get(nombreEquipo).add(new Empleado(nombreEmpleado));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            UtilidadesBD.cerrarConexion(conexion);
+            try {
+                st.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("==============================================================");
+        for (String equipo : mapaEmpleados.keySet()) {
+            List<Empleado> empleados = mapaEmpleados.get(equipo);
+    
+            System.out.print("Nombre Equipo: " + equipo + " - Número Empleados: " + empleados.size() + " - Empleados: ");
+    
+            for (Empleado emp : empleados) {
+                System.out.print(emp.getNombre() + ", ");
+            }
+            System.out.println();
+        }
+        
+        return mapaEmpleados;
+    }
+
 }
