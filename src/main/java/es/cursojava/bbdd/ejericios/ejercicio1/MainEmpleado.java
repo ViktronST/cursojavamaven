@@ -34,6 +34,7 @@ public class MainEmpleado {
         empleado.crearListaEmpleados();
         empleado.consultaEmpleadoEdad(0,0);
         empleado.crearMapa();
+        empleado.crearMapa2();
     }
 
     private void mostrarEmpleado() {
@@ -210,60 +211,67 @@ public class MainEmpleado {
     }
     
     // = = = = = = = = MAPA CON TODOS LOS DATOS DE LA TABLA EQUIPO Y EMPLEADO = = = = = = = = 
-    private Map<List<Equipo>, List<Empleado>> crearMapa2() {
-        Map<List<Equipo>, List<Empleado>> mapaEmpleados = new HashMap<>();
-
+    private Map<Equipo, List<Empleado>> crearMapa2() {
+        Map<Equipo, List<Empleado>> mapaEmpleados = new HashMap<>();
+    
         Connection conexion = UtilidadesBD.crearConexion();
         Statement st = null;
         ResultSet rs = null;
         try {
             st = conexion.createStatement();
-            rs = st.executeQuery(CONSULTA_EQUIPO_EMPLEADOS);
+            rs = st.executeQuery(CONSULTA_EQUIPO_Y_EMPLEADOS);
     
             while (rs.next()) {
-                int id = rs.getInt("id");
+                // Datos del empleado.
+                int idEmpleado = rs.getInt("ID_EMPLEADO");
                 String nombreEmpleado = rs.getString("NOMBRE_EMPLEADO");
-                int edad = rs.getInt("edad");
-                double salario = rs.getDouble("salario");
-                int departamentoId = rs.getInt("departamento_id");
-                Date fechaContratacion = rs.getDate("fecha_contratacion");
-                int equipoId = rs.getInt("equipo_id");
-
-                
-                String nombreEquipo = rs.getString("NOMBRE_EQUIPO");
-                
-
-                // mapaEmpleados.put(nombreEquipo, new ArrayList<>()); 
-
-                mapaEmpleados.putIfAbsent(new ArrayList<>(), new ArrayList<>());
+                int edad = rs.getInt("EDAD");
+                double salario = rs.getDouble("SALARIO");
+                int departamentoId = rs.getInt("DEPARTAMENTO_ID");
+                Date fechaContratacion = rs.getDate("FECHA_CONTRATACION");
+                int equipoId = rs.getInt("QUIPO_ID");
     
-                mapaEmpleados.get(nombreEquipo).add(new Empleado(nombreEmpleado));
-
+                // Datos del equipo.
+                int idEquipo = rs.getInt("ID_EQUIPO");
+                String nombreEquipo = rs.getString("NOMBRE_EQUIPO");
+                Date fechaCreacion = rs.getDate("FECHA_CREACION");
+    
+                // Crear objeto equipo.
+                Equipo equipo = new Equipo(idEquipo, nombreEquipo, fechaCreacion);
+    
+                // Crear objeto empleado.
+                Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, edad, salario, departamentoId, fechaContratacion, equipoId);
+    
+                // Agregar equipo si no existe en el mapa.
+                mapaEmpleados.putIfAbsent(equipo, new ArrayList<>());
+    
+                // Agregar empleado a la lista de ese equipo.
+                mapaEmpleados.get(equipo).add(empleado);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            UtilidadesBD.cerrarConexion(conexion);
             try {
-                st.close();
-                rs.close();
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                UtilidadesBD.cerrarConexion(conexion);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
+    
         System.out.println("==============================================================");
-        for (String equipo : mapaEmpleados.keySet()) {
+        for (Equipo equipo : mapaEmpleados.keySet()) {
             List<Empleado> empleados = mapaEmpleados.get(equipo);
     
-            System.out.print("Nombre Equipo: " + equipo + " - Número Empleados: " + empleados.size() + " - Empleados: ");
+            System.out.print("Nombre Equipo: " + equipo.getNombre() + " - Número Empleados: " + empleados.size() + " - Empleados: ");
     
             for (Empleado emp : empleados) {
                 System.out.print(emp.getNombre() + ", ");
             }
             System.out.println();
         }
-        
+    
         return mapaEmpleados;
     }
 
