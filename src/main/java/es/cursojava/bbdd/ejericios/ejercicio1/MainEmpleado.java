@@ -8,7 +8,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.cursojava.utiles.Utilidades2;
 import es.cursojava.utiles.UtilidadesBD;
 
 public class MainEmpleado {
@@ -17,8 +16,7 @@ public class MainEmpleado {
         MainEmpleado empleado = new MainEmpleado();
         empleado.mostrarEmpleado();
         empleado.crearListaEmpleados();
-        empleado.pedirEdadEmpleado();
-        empleado.mostrarEdadEmpleado();
+        empleado.consultaEmpleadoEdad(0,0);
     }
 
     private void mostrarEmpleado() {
@@ -93,13 +91,51 @@ public class MainEmpleado {
         System.out.println(listaEmpleados.size());
     }
 
-    private int pedirEdadEmpleado() {
-        Utilidades2.pideDatoNumerico("Introduzca una edad: ");
-        return edad;
-    }
+    private List<Empleado> consultaEmpleadoEdad(int edadConsultada, double salarioConsultado) {
+        List<Empleado> empleados = new ArrayList<>();
 
-    private void mostrarEdadEmpleado() {
-        
+        Connection conexion = UtilidadesBD.crearConexion();
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            st = conexion.createStatement();
+            String query = CONSULTA_EMPLEADOS + " WHERE 1=1 ";
 
+            if (edadConsultada!=0){
+                query+= " AND EDAD>"+edadConsultada;
+            }
+
+            if (salarioConsultado!=0){
+                query+= " AND SALARIO>"+salarioConsultado;
+            }
+
+            System.out.println(query);
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                String nombre = rs.getString("NOMBRE");
+                int edad = rs.getInt("EDAD");
+                double salario = rs.getDouble("SALARIO");
+
+                System.out.println("Registro.[ id: "+ id + ", nombre: "+ nombre
+                + ", edad: " + edad + ", salario: "+salario+ "]");
+
+                Empleado emp = new Empleado(id, nombre, edad, salario);
+                empleados.add(emp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            UtilidadesBD.cerrarConexion(conexion);
+            try {
+                st.close();
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return empleados;
     }
 }

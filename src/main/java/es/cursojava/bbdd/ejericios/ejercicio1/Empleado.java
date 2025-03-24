@@ -22,6 +22,13 @@ public class Empleado {
         this.equipoId = equipoId;
     }
 
+    public Empleado(int id, String nombre, int edad, double salario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.salario = salario;
+    }
+
     // toString
     @Override
     public String toString() {
