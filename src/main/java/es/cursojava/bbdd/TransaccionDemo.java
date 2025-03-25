@@ -1,95 +1,86 @@
 package es.cursojava.bbdd;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import es.cursojava.bbdd.ejericios.ejercicio1.Empleado;
 import es.cursojava.utiles.UtilidadesBD;
 
 public class TransaccionDemo {
 
     public static void main(String[] args) {
-        TransaccionDemo demo = new TransaccionDemo();
-        demo.testTransaction();
+        testTransaction();
     }
-
-
-    public static void testTransaction(Empleado empleado) throws SQLException {
-        int contador = 100_000;
-        Connection conn = null;
+    
+    public static void testTransaction(){
+        int contador =10_000;
+        Connection con = null;
         PreparedStatement ps = null;
-        try {
-            // Esto nos permite trabajar con el Date de java en el try, mientras tenemos importada 'java.sql.Date'.
+        try{
+            
+            con = UtilidadesBD.crearConexion();
+            con.setAutoCommit(false);
+
+            //Borramos la tabla
+            String delete = "DELETE FROM EMPLEADOS";
+            ps = con.prepareStatement(delete); 
+            int totalBorrados = ps.executeUpdate();
+            System.out.println("Registros eliminados: "+totalBorrados);
+            ps.close();
+
+            String insert = "INSERT INTO EMPLEADOS VALUES (?,?,?,?,?,?,?)";
+            
             java.util.Date fecha = new java.util.Date();
-            
-            
-
-            for (int i = 0; i < 1_000_000; i++) {
-                
-                conn = UtilidadesBD.crearConexion();
-                conn.setAutoCommit(false);
-
-                // Borramos la tabla.
-                String delete = "DELETE FROM EMPLEADOS";
-                ps = conn.prepareStatement(delete);
-                int totalBorrados = ps.executeUpdate();
-                System.out.println("Registros Eliminados: " + totalBorrados);
-                ps.close();
-                
-                String insert = "INSERT INTO EMPLEADOS VALUES (?,?,?,?,?,?,?)";
-                ps = conn.prepareStatement(insert);
-                
+            for (int i = 1; i < 99999; i++) {
+                ps = con.prepareStatement(insert); 
                 ps.setInt(1, i);
-                ps.setString(2, "nombre");
+                ps.setString(2, "Nombre "+i);
                 ps.setInt(3, (int)(Math.random()*100));
-                ps.setDouble(4, Math.random()*10_000);
+                ps.setDouble(4, Math.random()*10000);
                 ps.setInt(5, 2);
                 ps.setDate(6, null);
-                ps.setInt(7, (int)(Math.random()*30/10));
+                ps.setInt(7,1);
 
                 ps.executeUpdate();
+                
+                // if(i==contador){
 
-                // if (i==contador) {
-                //     contador += 100_000;
+                //     contador+=100_000;
                 // }
 
-                if (i%contador==0) {
-                    java.util.Date fecha2 = new java.util.Date();
+                if(i%contador==0){
+                    java.util.Date fecha2  = new java.util.Date();
                     long tiempoFinal = fecha2.getTime() - fecha.getTime();
-                    System.out.println("Tiempo transcurrido para " + i + " registros = " + tiempoFinal);
+                    System.out.println("Tiempo transcurrido para "+ i +" registros = " + tiempoFinal);
                     Thread.sleep(2000);
                 }
 
-                if (i==999_999) {
-                    throw new SQLException("Si");
+                if (i==999999){
+                    throw new SQLException("Por que sí");
                 }
 
                 ps.close();
             }
 
-            conn.commit();
-        } catch (Exception sqle) {
-
+            //Realizamos el commit
+            con.commit();
+        }catch(Exception sqle){
             System.out.println("Error" + sqle.getMessage());
-
             try {
-                conn.rollback();
+                con.rollback();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-
-        }finally {
-
+        }finally{
+            System.out.println("Cerramos conexiones");
+            
             try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                con.setAutoCommit(true);
+                con.close();
+                ps.close();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
             }
-
         }
-
     }
-
 }
