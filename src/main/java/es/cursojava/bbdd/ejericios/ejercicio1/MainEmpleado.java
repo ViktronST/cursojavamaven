@@ -222,30 +222,24 @@ public class MainEmpleado {
             rs = st.executeQuery(CONSULTA_EQUIPO_Y_EMPLEADOS);
     
             while (rs.next()) {
-                // Datos del empleado.
                 int idEmpleado = rs.getInt("ID_EMPLEADO");
                 String nombreEmpleado = rs.getString("NOMBRE_EMPLEADO");
                 int edad = rs.getInt("EDAD");
                 double salario = rs.getDouble("SALARIO");
                 int departamentoId = rs.getInt("DEPARTAMENTO_ID");
                 Date fechaContratacion = rs.getDate("FECHA_CONTRATACION");
-                int equipoId = rs.getInt("QUIPO_ID");
-    
-                // Datos del equipo.
-                int idEquipo = rs.getInt("ID_EQUIPO");
+                int equipoId = rs.getInt("EQUIPO_ID");
+            
+                int idEquipoTrabajo = rs.getInt("ID_EQUIPO_TRABAJO");
                 String nombreEquipo = rs.getString("NOMBRE_EQUIPO");
                 Date fechaCreacion = rs.getDate("FECHA_CREACION");
     
-                // Crear objeto equipo.
-                Equipo equipo = new Equipo(idEquipo, nombreEquipo, fechaCreacion);
-    
-                // Crear objeto empleado.
                 Empleado empleado = new Empleado(idEmpleado, nombreEmpleado, edad, salario, departamentoId, fechaContratacion, equipoId);
+                
+                Equipo equipo = new Equipo(idEquipoTrabajo, nombreEquipo, fechaCreacion);
     
-                // Agregar equipo si no existe en el mapa.
                 mapaEmpleados.putIfAbsent(equipo, new ArrayList<>());
     
-                // Agregar empleado a la lista de ese equipo.
                 mapaEmpleados.get(equipo).add(empleado);
             }
         } catch (SQLException e) {
@@ -264,10 +258,10 @@ public class MainEmpleado {
         for (Equipo equipo : mapaEmpleados.keySet()) {
             List<Empleado> empleados = mapaEmpleados.get(equipo);
     
-            System.out.print("Nombre Equipo: " + equipo.getNombre() + " - Número Empleados: " + empleados.size() + " - Empleados: ");
+            System.out.print("Nombre Equipo: " + equipo.getNombre() + " - Empleado: ");
     
             for (Empleado emp : empleados) {
-                System.out.print(emp.getNombre() + ", ");
+                System.out.print(emp.getNombre());
             }
             System.out.println();
         }
