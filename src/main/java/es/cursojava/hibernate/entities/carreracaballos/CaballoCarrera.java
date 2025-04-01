@@ -1,5 +1,7 @@
 package es.cursojava.hibernate.entities.carreracaballos;
 
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.AgeException;
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.SpeedException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,7 +39,8 @@ public class CaballoCarrera {
     public CaballoCarrera() {
     }
 
-    public CaballoCarrera(String nombre, int edad, double velocidadMaxima, int numeroTriunfos, double experiencia, boolean estaActivo) {
+    public CaballoCarrera(String nombre, int edad, double velocidadMaxima, int numeroTriunfos, double experiencia, boolean estaActivo) 
+                        throws AgeException{
         this.nombre = nombre;
         rangoEdad(edad);
         controlarVelocidadMax(velocidadMaxima);
@@ -103,7 +106,7 @@ public class CaballoCarrera {
     }
     
     // Métodos
-    private void rangoEdad(int edad){
+    private void rangoEdad(int edad) throws AgeException{
         if (edad>2 && edad<30) {
             this.edad = edad;        
         } else {
@@ -111,7 +114,7 @@ public class CaballoCarrera {
         }
     }
 
-    private void controlarVelocidadMax(double velocidadMaxima) {
+    private void controlarVelocidadMax(double velocidadMaxima) throws SpeedException {
         if (velocidadMaxima>30 && velocidadMaxima<80) {
             this.velocidadMaxima = velocidadMaxima;
         } else {
