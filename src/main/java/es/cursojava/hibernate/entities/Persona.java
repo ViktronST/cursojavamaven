@@ -1,4 +1,4 @@
-package es.cursojava.hibernate;
+package es.cursojava.hibernate.entities;
 
 import java.util.Date;
 

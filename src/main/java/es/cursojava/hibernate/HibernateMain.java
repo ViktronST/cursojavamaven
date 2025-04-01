@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import es.cursojava.hibernate.entities.Persona;
+
 public class HibernateMain {
     public static void main(String[] args) {
 
@@ -28,10 +30,6 @@ public class HibernateMain {
             System.err.println("Error al crear la SessionFactory." + ex);
             throw new ExceptionInInitializerError(ex);
         }
-        
-        
-
-        
         
         
     }
