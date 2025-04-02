@@ -6,6 +6,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import es.cursojava.hibernate.entities.carreracaballos.CaballoCarrera;
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.AgeException;
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.ExperienceException;
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.SpeedException;
+import es.cursojava.hibernate.entities.carreracaballos.excepciones.WinsException;
 
 public class CaballoMain {
     public static void main(String[] args) {
@@ -32,7 +36,7 @@ public class CaballoMain {
     
             tx.commit();
 
-        } catch (Throwable ex) {
+        } catch (AgeException | ExperienceException | SpeedException | WinsException ex) {
             System.err.println("Error al crear la SessionFactory." + ex);
             throw new ExceptionInInitializerError(ex);
         }
