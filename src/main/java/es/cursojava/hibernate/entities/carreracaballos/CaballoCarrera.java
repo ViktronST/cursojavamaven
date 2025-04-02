@@ -10,6 +10,7 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "TB_CABALLOS")
@@ -20,8 +21,10 @@ public class CaballoCarrera {
     private Long id;
 
     @Column(name = "nombre", unique = true, length = 50, nullable = false)
+    // @Size(max = 50, message = "El nombre no puede tener más de 50 caracteres")   // Manera de sustituir el length
     private String nombre;
 
+    // @Column(name = "edad", nullable = false, columnDefinition = "int check (edad >= 2 and edad <= 30)")
     @Column(name = "edad", nullable = false)
     @Min(value = 2)
     @Max(value = 30)

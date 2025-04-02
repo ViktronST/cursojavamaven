@@ -24,7 +24,7 @@
         <!-- Generar las tablas automáticamente -->
         <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- none(Por defecto en Hibernate 5.2+) No realiza ninguna acción sobre el esquema.
         validate:	Comprueba que las tablas y columnas existen y coinciden con las entidades. No crea ni actualiza.
@@ -34,6 +34,7 @@
         drop:	Elimina el esquema sin crearlo de nuevo (raro de usar).
         create-only:	Crea el esquema al iniciar, pero no lo elimina al cerrar (Hibernate 5.5+). -->
         <!-- Clase mapeada -->
+        <mapping class="es.cursojava.hibernate.entities.persona.Persona"/>
         <mapping class="es.cursojava.hibernate.entities.carreracaballos.CaballoCarrera"/>
 
     </session-factory>

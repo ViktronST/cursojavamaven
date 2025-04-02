@@ -3,7 +3,6 @@ package es.cursojava.hibernate.entities.carreracaballos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,13 +39,12 @@ public class ServicioCaballo {
         return caballosValidos;
     }
 
-
     public void insertarCaballos(List<CaballoCarrera> caballos) {
         try (Session session = UtilidadesHibernate.getSession()) {
             Transaction tx = session.beginTransaction();
     
             for (CaballoCarrera caballo : caballos) {
-                session.persist(caballo); // Solo se insertan los caballos válidos
+                session.persist(caballo);
             }
     
             tx.commit();
