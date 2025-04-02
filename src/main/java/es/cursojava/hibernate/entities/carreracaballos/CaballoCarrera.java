@@ -1,15 +1,15 @@
 package es.cursojava.hibernate.entities.carreracaballos;
 
-import es.cursojava.hibernate.entities.carreracaballos.excepciones.AgeException;
-import es.cursojava.hibernate.entities.carreracaballos.excepciones.ExperienceException;
-import es.cursojava.hibernate.entities.carreracaballos.excepciones.SpeedException;
-import es.cursojava.hibernate.entities.carreracaballos.excepciones.WinsException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "TB_CABALLOS")
@@ -23,15 +23,22 @@ public class CaballoCarrera {
     private String nombre;
 
     @Column(name = "edad", nullable = false)
+    @Min(value = 2)
+    @Max(value = 30)
     private int edad;
 
     @Column(name = "velocidad_maxima", nullable = false)
+    @DecimalMin(value = "30.0")
+    @DecimalMax(value = "80.0")
     private double velocidadMaxima;
 
     @Column(name = "numero_triunfos")
+    @Min(0)
     private int numeroTriunfos;
 
     @Column(name = "experiencia")
+    @DecimalMin("0.0") 
+    @DecimalMax("10.0")
     private double experiencia;
 
     @Column(name = "esta_activo")
@@ -41,13 +48,12 @@ public class CaballoCarrera {
     public CaballoCarrera() {
     }
 
-    public CaballoCarrera(String nombre, int edad, double velocidadMaxima, int numeroTriunfos, double experiencia, boolean estaActivo) 
-                        throws AgeException, SpeedException, WinsException, ExperienceException{
+    public CaballoCarrera(String nombre, int edad, double velocidadMaxima, int numeroTriunfos, double experiencia, boolean estaActivo){
         this.nombre = nombre;
-        rangoEdad(edad);
-        controlarVelocidadMax(velocidadMaxima);
-        numTriunfos(numeroTriunfos);
-        controlarExperiencia(experiencia);
+        this.edad = edad;
+        this.velocidadMaxima = velocidadMaxima;
+        this.numeroTriunfos = numeroTriunfos;
+        this.experiencia = experiencia;
         this.estaActivo = estaActivo;
     }
 
@@ -105,39 +111,6 @@ public class CaballoCarrera {
         return "CaballoCarrera [Id: " + id + ", Nombre: " + nombre + ", Edad: " + edad + ", Velocidad Maxima: "
                 + velocidadMaxima + ", Numero Triunfos: " + numeroTriunfos + ", Experiencia: " + experiencia
                 + ", Activo: " + estaActivo + "]";
-    }
-    
-    // Métodos
-    private void rangoEdad(int edad) throws AgeException{
-        if (edad>2 && edad<30) {
-            this.edad = edad;        
-        } else {
-            System.out.println("La edad de" + nombre + " no es apta para competir");
-        }
-    }
-
-    private void controlarVelocidadMax(double velocidadMaxima) throws SpeedException {
-        if (velocidadMaxima>30 && velocidadMaxima<80) {
-            this.velocidadMaxima = velocidadMaxima;
-        } else {
-            System.out.println("La velocidad máxima de " + nombre + " no es apta para competir");
-        }
-    }
-
-    private void numTriunfos(int numeroTriunfos) throws WinsException{
-        if (numeroTriunfos>0) {
-            this.numeroTriunfos = numeroTriunfos;
-        } else {
-            System.out.println("El número de Triunfos no puede ser negativo");
-        }
-    }
-
-    private void controlarExperiencia(double experiencia) throws ExperienceException{
-        if (experiencia>0 && experiencia<10) {
-            this.experiencia = experiencia;
-        } else {
-            System.out.println("La experiencia de " + nombre + " no es apta para competir");
-        }
     }
 
 }
