@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "TB_CABALLOS")
+@Table(name = "TB_CABALLOS_CARRERA")
 
 public class CaballoCarrera {
     @Id

@@ -79,11 +79,11 @@ public class CaballoMain {
     private void iniciarCaballosValidos() {
         List<CaballoCarrera> caballos = new ArrayList<>();
 
-        CaballoCarrera c1 = new CaballoCarrera("Spirit", 12, 75, -7, 6.7, true); 
+        CaballoCarrera c1 = new CaballoCarrera("Spirit", 12, 75, 7, 6.7, true); 
         CaballoCarrera c2 = new CaballoCarrera("Rocinante", 30, 80, 10, 9.9, false);
-        CaballoCarrera c3 = new CaballoCarrera("El Caballo Blanco de Santiago", 225, 60, 5, 7.2, false);
+        CaballoCarrera c3 = new CaballoCarrera("El Caballo Blanco de Santiago", 25, 60, 5, 7.2, false);
         CaballoCarrera c4 = new CaballoCarrera("Ramona", 15, 63, 11, 10, true);
-        CaballoCarrera c5 = new CaballoCarrera("El Tullido", 1, 50, 1, 3.1, true);
+        CaballoCarrera c5 = new CaballoCarrera("El Tullido", 2, 50, 1, 3.1, true);
 
         caballos.add(c1);
         caballos.add(c2);

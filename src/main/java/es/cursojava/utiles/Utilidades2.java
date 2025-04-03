@@ -20,13 +20,32 @@ public class Utilidades2 {
 		return cadena;
 	}
     
+    // public static double pideDatoDecimal(String texto) {
+	// 	System.out.print(texto);
+	// 	Scanner scan = new Scanner(System.in);
+	// 	double numero = scan.nextInt();
+
+	// 	return numero;
+	// }
+
     public static double pideDatoDecimal(String texto) {
-		System.out.print(texto);
-		Scanner scan = new Scanner(System.in);
-		double numero = scan.nextInt();
-		
-		return numero;
-	}
+        System.out.print(texto);
+        Scanner scan = new Scanner(System.in);
+        double numero = 0;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                String entrada = scan.next(); // Leer como String
+                entrada = entrada.replace(',', '.'); // Reemplazar coma por punto
+                numero = Double.parseDouble(entrada); // Convertir a double
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("⚠️ Error: Ingresa un número decimal válido.");
+            }
+        }
+        return numero;
+    }
 
 	
     /**
