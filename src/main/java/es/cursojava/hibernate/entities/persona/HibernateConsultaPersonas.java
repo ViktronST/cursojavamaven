@@ -1,10 +1,12 @@
 package es.cursojava.hibernate.entities.persona;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import es.cursojava.hibernate.dto.PersonaDTO;
 import es.cursojava.utiles.HibernateUtil;
 
 public class HibernateConsultaPersonas {
@@ -20,32 +22,32 @@ public class HibernateConsultaPersonas {
             System.out.println(persona);
         }
 
-        // Query para obtener una persona por su nombre
-        Query<Persona> query = session.createQuery("from Persona p where p.nombre = :nombreParametro", Persona.class);
-        query.setParameter("nombreParametro", "Ana");
-        // List<Persona> personas = query.list();
-        // System.out.println(personas.size());
-        Persona p = query.uniqueResult();
-        System.out.println(p);
+        // // Query para obtener una persona por su nombre
+        // Query<Persona> query = session.createQuery("from Persona p where p.nombre = :nombreParametro", Persona.class);
+        // query.setParameter("nombreParametro", "Ana");
+        // // List<Persona> personas = query.list();
+        // // System.out.println(personas.size());
+        // Persona p = query.uniqueResult();
+        // System.out.println(p);
 
-        // Query para obtener una persona por su edad
-        // Repetimos la edad para que nos salga un error: NonUniqueResultException: Query did not return a unique result: 2 results were returned
-        // Ya que query2.uniqueResult() solo devuelve un resultado, si hay más de uno, lanza una excepción.
-        Query<Persona> query2 = session.createQuery("from Persona p where p.edad = :edadParametro", Persona.class);
-        query2.setParameter("edadParametro", "25");
-        Persona p2 = query2.uniqueResult();
-        System.out.println(p2);
+        // // Query para obtener una persona por su edad
+        // // Repetimos la edad para que nos salga un error: NonUniqueResultException: Query did not return a unique result: 2 results were returned
+        // // Ya que query2.uniqueResult() solo devuelve un resultado, si hay más de uno, lanza una excepción.
+        // Query<Persona> query2 = session.createQuery("from Persona p where p.edad = :edadParametro", Persona.class);
+        // query2.setParameter("edadParametro", "25");
+        // Persona p2 = query2.uniqueResult();
+        // System.out.println(p2);
 
-        // Query para obtener solo el nombre de las personas que tienen una edad mayor a 24
-        // En este caso, no es necesario crear una clase Persona para obtener solo el nombre, ya que no se necesita un objeto completo.
-        // En este caso, se puede usar un String como tipo de resultado, ya que el nombre es un String.
-        String hql = "select p.nombre from Persona p where p.edad>:edadMinima";
-        Query<String> query3 = session.createQuery(hql, String.class);
-        query3.setParameter("edadMinima", 24);
-        List<String> nombres = query3.list();
-        for (String nombre : nombres) {
-            System.out.println(nombre);
-        }
+        // // Query para obtener solo el nombre de las personas que tienen una edad mayor a 24
+        // // En este caso, no es necesario crear una clase Persona para obtener solo el nombre, ya que no se necesita un objeto completo.
+        // // En este caso, se puede usar un String como tipo de resultado, ya que el nombre es un String.
+        // String hql = "select p.nombre from Persona p where p.edad>:edadMinima";
+        // Query<String> query3 = session.createQuery(hql, String.class);
+        // query3.setParameter("edadMinima", 24);
+        // List<String> nombres = query3.list();
+        // for (String nombre : nombres) {
+        //     System.out.println(nombre);
+        // }
 
         // Query para obtener el nombre y la edad de las personas
         // En este caso, se puede usar un Object[] como tipo de resultado, ya que se obtienen dos resultados.
@@ -55,6 +57,22 @@ public class HibernateConsultaPersonas {
         for (Object[] personas : resultado) {
             System.out.println("Nombre: " + personas[0] + ", Edad: " + personas[1]);
         }
+
+        // Usamos patrón DTO con la clase PersonaDTO
+        String hql3 = "select p.nombre, p.edad from Persona p";
+        // Query<PersonaDTO> query5 = session.createQuery(hql2, PersonaDTO.class);
+        Query<Object[]> query5 = session.createQuery(hql3, Object[].class);
+        List<Object[]> resultado3 = query5.list();
+        List<PersonaDTO> personasDTO = new ArrayList<>();
+        for (Object[] personas : resultado3) {
+            System.out.println("Nombre: " + personas[0] + ", Edad: " + personas[1]);
+            String nombre = (String)personas[0];
+            int edad = (int)personas[1];
+            PersonaDTO pdto = new PersonaDTO(nombre, edad);
+            personasDTO.add(pdto);
+        }
+
+
 
         
     }
