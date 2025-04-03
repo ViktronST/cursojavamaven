@@ -60,7 +60,6 @@ public class HibernateConsultaPersonas {
 
         // Usamos patrón DTO con la clase PersonaDTO
         String hql3 = "select p.nombre, p.edad from Persona p";
-        // Query<PersonaDTO> query5 = session.createQuery(hql2, PersonaDTO.class);
         Query<Object[]> query5 = session.createQuery(hql3, Object[].class);
         List<Object[]> resultado3 = query5.list();
         List<PersonaDTO> personasDTO = new ArrayList<>();
@@ -71,6 +70,14 @@ public class HibernateConsultaPersonas {
             PersonaDTO pdto = new PersonaDTO(nombre, edad);
             personasDTO.add(pdto);
         }
+        System.out.println("Personas DTO en lista propia: " + personasDTO.size());
+
+        // Usamos patrón DTO con la clase PersonaDTO más elegante
+        String hql4 = "select new es.cursojava.hibernate.dto.PersonaDTO(p.nombre, p.edad) from Persona p where p.edad>:edadMin";
+        Query<PersonaDTO> query6 = session.createQuery(hql4, PersonaDTO.class);
+        query6.setParameter("edadMin", 20);
+        List<PersonaDTO> registros6 = query6.list();
+        System.out.println("Personas DTO: " + registros6.size());
 
 
 
