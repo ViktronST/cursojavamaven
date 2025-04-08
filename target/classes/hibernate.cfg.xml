@@ -36,6 +36,7 @@
         <!-- Clase mapeada -->
         <mapping class="es.cursojava.hibernate.entities.persona.Persona"/>
         <mapping class="es.cursojava.hibernate.entities.carreracaballos.CaballoCarrera"/>
+        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.CarreraCaballosMain"/>
 
     </session-factory>
 </hibernate-configuration>
