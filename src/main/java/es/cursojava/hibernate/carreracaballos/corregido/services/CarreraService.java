@@ -99,4 +99,8 @@ public class CarreraService {
         }
         return dtos;
     }
+
+    public void eliminarCaballo(long id) {
+        dao.eliminar(id);
+    }
 }

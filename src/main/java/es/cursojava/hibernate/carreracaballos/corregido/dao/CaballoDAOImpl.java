@@ -42,7 +42,9 @@ public class CaballoDAOImpl implements CaballoDAO {
     public void eliminar(Long id) {
         Session session = HibernateUtil.getSession();
         Transaction tx = session.beginTransaction();
+        // Eliminar el caballo de la base de datos según su id (primary key).
         CaballoCarrera c = session.find(CaballoCarrera.class, id);
+        // Si el caballo existe, lo eliminamos.
         if (c != null) session.remove(c);
         tx.commit();
     }

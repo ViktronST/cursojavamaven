@@ -20,7 +20,7 @@ public class CarreraCaballosFront {
         int opcion;
         do {
             Utilidades2.pintarMenu(new String[]{"1.Insertar nuevo caballo ",
-                "2.Mostrar Caballos","3.Iniciar carrera","4.Salir"});
+                "2.Mostrar Caballos","3.Iniciar carrera","4.Borrar caballo" ,"5.Salir"});
             opcion = Utilidades2.pideDatoNumerico("Elige una opción: ");
 
             
@@ -35,6 +35,9 @@ public class CarreraCaballosFront {
                     iniciarCarrera();
                     break;
                 case 4:
+                    eliminarCaballo();
+                    break;
+                case 5:
                     System.out.println("Aaaadios!");;
                     break;
                 default:
@@ -66,5 +69,16 @@ public class CarreraCaballosFront {
 
     private void iniciarCarrera (){
         servicio.simularCarrera(servicio.obtenerCaballos(true));
+    }
+
+    private void eliminarCaballo (){
+        // Abrimos la session con este método.
+        // Así no hará falta que al eliminar se haga un select para comprobar que existe el caballo.
+        mostrarCaballos();
+
+        // Sin el método anterior, hibernate hace un select para comprobar que existe el caballo.
+        int id = Utilidades2.pideDatoNumerico("Elige el id del caballo a eliminar: ");
+        servicio.eliminarCaballo(id);
+        System.out.println("Caballo con id " + id + " eliminado correctamente");
     }
 }
