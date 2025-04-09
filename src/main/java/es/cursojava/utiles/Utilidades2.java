@@ -1,5 +1,8 @@
 package es.cursojava.utiles;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Utilidades2 {
@@ -47,7 +50,20 @@ public class Utilidades2 {
         return numero;
     }
 
-	
+    public static Date pideDatoFecha(String texto) {
+        System.out.print(texto);
+        Scanner scan = new Scanner(System.in);
+        String fechaStr = scan.nextLine();
+        Date fecha = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            fecha = formato.parse(fechaStr);
+        } catch (ParseException e) {
+            System.out.println("Error: Formato de fecha inválido. Usa dd/MM/yyyy.");
+        }
+        return fecha;
+    }
+
     /**
      * Funcion que sirve para pintar las opciones de un menu que llegan en un array de Strings.
      * @param menuArray: Array de Strings con las opciones del menu
