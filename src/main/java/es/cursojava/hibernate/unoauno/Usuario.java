@@ -22,6 +22,16 @@ public class Usuario {
 
     private String nombre;
 
+    /*
+     * PERSIST: Guarda la dirección al guardar el usuario.
+     * MERGE: Actualiza la dirección al actualizar el usuario.
+     * REMOVE: Elimina la dirección al eliminar el usuario.
+     * REFRESH: Actualiza la dirección al refrescar el usuario.
+     * DETACH: Desvincula la dirección del usuario.
+     * ALL: Aplica todos los cambios anteriores a la dirección.
+     * NO: No aplica ningún cambio a la dirección.
+     */
+
     // CascadeType.ALL : Sigue cualquier cambio que se haga en el usuario y lo aplica a la dirección.
     // fetch = FetchType.LAZY : Carga perezosa de la dirección, es decir, no se carga la dirección hasta que se accede a ella.
     @OneToOne(cascade = CascadeType.ALL, fetch = jakarta.persistence.FetchType.LAZY) // Carga perezosa (Lazy) de la dirección.
@@ -29,6 +39,7 @@ public class Usuario {
     // Elimina la dirección SÓLO al eliminar el usuario.
     //@OneToOne(cascade = CascadeType.REMOVE)   
     //@OneToOne
+    
     @JoinColumn(name = "direccion_id") // crea la foreign key en la tabla Usuario
     private Direccion direccion;
 

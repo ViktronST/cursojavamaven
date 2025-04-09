@@ -18,8 +18,8 @@ public class Direccion {
     private String ciudad;
 
     //Bidireccional
-    //@OneToOne(mappedBy = "direccion") // El dueño es Usuario
-    //private Usuario usuario;
+    @OneToOne(mappedBy = "direccion") // El dueño es Usuario
+    private Usuario usuario;
     
 
     public Direccion() {
@@ -47,6 +47,12 @@ public class Direccion {
     }
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     

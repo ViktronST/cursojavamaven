@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import es.cursojava.utiles.HibernateUtil;
 import es.cursojava.utiles.Utilidades;
@@ -15,7 +16,12 @@ public class Main {
         
         //insertarUsuario();
 
-        consultarUsuarios();
+        //consultarUsuarios();
+
+        //consultarDirecciones();
+
+        Usuario u = consultarUsuarioPorDireccionID(1L);
+        System.out.println(u.getNombre() + " " + u.getDireccion().getCalle() + " " + u.getDireccion().getCiudad());
    
         session.close();
     }
@@ -42,7 +48,33 @@ public class Main {
         for (Usuario usuario : usuarios) {
             System.out.println("Usuario: " + usuario.getNombre() 
                                 + ", Direccion: " + usuario.getDireccion().getCalle() 
-                                + ", Ciudad " + usuario.getDireccion().getCiudad());
+                                + ", Ciudad: " + usuario.getDireccion().getCiudad());
         }
+    }
+
+    private static void consultarDirecciones() {
+        List<Direccion> direcciones = session.createQuery("from Direccion", Direccion.class).getResultList();
+
+        for (Direccion direccion : direcciones) {
+            System.out.println("Direccion: " + direccion.getCalle() 
+                                + ", Ciudad: " + direccion.getCiudad() 
+                                + ", Usuario: " + direccion.getUsuario().getNombre());
+        }
+    }
+
+    private static Usuario consultarUsuarioPorDireccionID(Long id) {
+        Direccion d = session.find(Direccion.class, id);
+        
+        return d.getUsuario();
+    }
+
+    private static Usuario consultarUsuarioPorDireccionIDHQL(Long id) {
+        String queryHql = "from Usuaurio u where u.direccion.id = :idDireccion";
+
+        Query<Usuario> query = session.createQuery(queryHql, Usuario.class);
+        query.setParameter("idDireccion", id).getSingleResult();    // Si no hay resultado lanza una excepción
+        Usuario usuario = query.uniqueResult();  // Si hay mas de un resultado lanza una excepción
+
+        return usuario;
     }
 }
