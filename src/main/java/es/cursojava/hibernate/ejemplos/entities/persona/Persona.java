@@ -1,4 +1,4 @@
-package es.cursojava.hibernate.entities.persona;
+package es.cursojava.hibernate.ejemplos.entities.persona;
 
 import java.util.Date;
 

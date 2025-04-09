@@ -1,4 +1,4 @@
-package es.cursojava.hibernate.entities.persona;
+package es.cursojava.hibernate.ejemplos.entities.persona;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import es.cursojava.hibernate.dto.PersonaDTO;
+import es.cursojava.hibernate.ejemplos.dto.PersonaDTO;
 import es.cursojava.utiles.HibernateUtil;
 
 public class HibernateConsultaPersonas {
