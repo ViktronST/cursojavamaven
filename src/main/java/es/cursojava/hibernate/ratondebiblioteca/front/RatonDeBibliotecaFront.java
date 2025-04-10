@@ -36,6 +36,7 @@ public class RatonDeBibliotecaFront {
                     break;
                 case 3:
                     obtenerPorEstudianteNombre();
+                    break;
                 case 4:
                     System.out.println("Aaaadios!");;
                     break;

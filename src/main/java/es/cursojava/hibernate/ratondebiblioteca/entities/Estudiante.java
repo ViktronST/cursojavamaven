@@ -3,6 +3,7 @@ package es.cursojava.hibernate.ratondebiblioteca.entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +22,7 @@ public class Estudiante {
     @Column(name = "nombre", nullable = false, length = 50, unique = true)
     private String nombre;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "carnet_biblioteca_id")
     private CarnetBiblioteca carnetBiblioteca;
 
