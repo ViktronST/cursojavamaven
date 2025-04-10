@@ -59,13 +59,21 @@ public class RatonDeBibliotecaFront {
         EstudianteDTO estudianteDto = new EstudianteDTO(nombre);
 
         servicio.insertarEstudiante(estudianteDto, carnetDto);
-       
+
         return estudianteDto;
     }
 
     private void mostrarEstudiante() {
         List<EstudianteDTO> estudiantes = servicio.obtenerEstudiantes();
-        estudiantes.forEach(System.out::println);
+        if (estudiantes.isEmpty()) {
+            System.out.println("No hay estudiantes en la base de datos.");
+        } else {
+            System.out.println("Lista de estudiantes:");
+            for (EstudianteDTO estudiante : estudiantes) {
+                System.out.println(estudiante.getNombre() + " - " + estudiante.getCarnetBibliotecaDTO().getFechaEmision() 
+                                    + " - " + estudiante.getCarnetBibliotecaDTO().getFechaVencimiento());
+            }
+        }
     }
 
     private void obtenerPorEstudianteNombre() {

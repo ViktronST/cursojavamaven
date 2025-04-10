@@ -30,18 +30,17 @@ public class BibliotecaService {
         dao.insertar(estudiante);
     }
 
-    public void insertarCarnetBiblioteca(EstudianteDTO estudianteDto) {
-        if (estudianteDto.getNombre() == null) {
-            throw new RatonDeBibliotecaException("ID no puede estar vacío");
-        }
-        Estudiante estudiante = dao.obtenerPorNombre(estudianteDto.getNombre());
-        if (estudiante == null) {
-            throw new RatonDeBibliotecaException("Estudiante no encontrado");
-        }
-    }
-
     public List<EstudianteDTO> obtenerEstudiantes() {
         List<Estudiante> estudiantes = dao.obtenerTodos();
+        if (estudiantes.isEmpty()) {
+            System.out.println("No hay estudiantes en la base de datos.");
+        } else {
+            System.out.println("Lista de estudiantes:");
+            for (Estudiante estudiante : estudiantes) {
+                System.out.println(estudiante.getNombre() + " - " + estudiante.getCarnetBiblioteca().getFechaEmision() 
+                                    + " - " + estudiante.getCarnetBiblioteca().getFechaVencimiento());
+            }
+        }
         return generaEstudianteDTO(estudiantes);
     }
 

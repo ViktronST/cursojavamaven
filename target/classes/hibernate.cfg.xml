@@ -39,6 +39,8 @@
         <mapping class="es.cursojava.hibernate.carreracaballos.corregido.CarreraCaballosMain"/>
         <mapping class="es.cursojava.hibernate.unoauno.Usuario"/>
         <mapping class="es.cursojava.hibernate.unoauno.Direccion"/>
+        <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.Estudiante"/>
+        <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca"/>
 
     </session-factory>
 </hibernate-configuration>
