@@ -3,18 +3,13 @@ package es.cursojava.hibernate.ratondebiblioteca.front;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
+import es.cursojava.hibernate.ratondebiblioteca.dto.CarnetBibliotecaDTO;
 import es.cursojava.hibernate.ratondebiblioteca.dto.EstudianteDTO;
-import es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca;
 import es.cursojava.hibernate.ratondebiblioteca.services.BibliotecaService;
-import es.cursojava.utiles.HibernateUtil;
 import es.cursojava.utiles.Utilidades;
 import es.cursojava.utiles.Utilidades2;
 
 public class RatonDeBibliotecaFront {
-    private static Session session = HibernateUtil.getSession();
     private BibliotecaService servicio;
     private String nombreBiblioteca;
 
@@ -24,11 +19,12 @@ public class RatonDeBibliotecaFront {
     }
 
     public void iniciarMenuBiblioteca(){
-        System.out.println("Bienvenido a la carrera "+ this.nombreBiblioteca);
+        System.out.println("===============================================================");
+        System.out.println("Bienvenido a la Biblioteca: '"+ this.nombreBiblioteca + "'");
         int opcion;
         do {
             Utilidades2.pintarMenu(new String[]{"1.Insertar nuevo estudiante ",
-                "2.Mostrar estudiantes","3.Salir"});
+                "2.Mostrar estudiantes","3.Obtener estudiante por nombre" ,"4.Salir"});
             opcion = Utilidades2.pideDatoNumerico("Elige una opción: ");
             
             switch (opcion) {
@@ -39,6 +35,8 @@ public class RatonDeBibliotecaFront {
                     mostrarEstudiante();
                     break;
                 case 3:
+                    obtenerPorEstudianteNombre();
+                case 4:
                     System.out.println("Aaaadios!");;
                     break;
                 default:
@@ -47,22 +45,30 @@ public class RatonDeBibliotecaFront {
         } while (opcion != 4);
     }
 
-    private void creaEstudiante() {
+    private EstudianteDTO creaEstudiante() {
+        System.out.println("= = = = = = = = = =");
+        System.out.println("Datos del Estudiante: ");
         String nombre = Utilidades.pideDatoCadena("Nombre del usuario: ");
+
+        System.out.println("= = = = = = = = = =");
+        System.out.println("Carnet del Estudiante: ");
         Date fechaEmision = Utilidades2.pideDatoFecha("Fecha de emisión: ");
         Date fechaVencimiento = Utilidades2.pideDatoFecha("Fecha de vencimiento: ");
 
-        CarnetBiblioteca carnet = new CarnetBiblioteca(fechaEmision, fechaVencimiento);
-        Estudiante estudianteDto = new Estudiante(nombre, carnet);
+        CarnetBibliotecaDTO carnetDto = new CarnetBibliotecaDTO(fechaEmision, fechaVencimiento);
+        EstudianteDTO estudianteDto = new EstudianteDTO(nombre);
+
+        servicio.insertarEstudiante(estudianteDto, carnetDto);
        
-        Transaction tx = session.beginTransaction();
-        session.persist(estudianteDto);
-        tx.commit();
-        System.out.println("Estudiante insertado.");
+        return estudianteDto;
     }
 
     private void mostrarEstudiante() {
         List<EstudianteDTO> estudiantes = servicio.obtenerEstudiantes();
         estudiantes.forEach(System.out::println);
+    }
+
+    private void obtenerPorEstudianteNombre() {
+
     }
 }
