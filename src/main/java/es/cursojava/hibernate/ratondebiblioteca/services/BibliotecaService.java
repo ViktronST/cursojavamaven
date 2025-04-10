@@ -10,24 +10,36 @@ import es.cursojava.hibernate.ratondebiblioteca.dto.EstudianteDTO;
 import es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca;
 import es.cursojava.hibernate.ratondebiblioteca.entities.Estudiante;
 import es.cursojava.hibernate.ratondebiblioteca.exceptions.RatonDeBibliotecaException;
+import es.cursojava.utiles.Utilidades2;
 
 public class BibliotecaService {
 
     private EstudianteDAO dao = new EstudianteDAOImpl();
 
     public void insertarEstudiante(EstudianteDTO estudianteDto, CarnetBibliotecaDTO carnetDto) {
-        if (estudianteDto.getNombre() == null || estudianteDto.getNombre().isEmpty()) {
-            throw new RatonDeBibliotecaException("Nombre no puede estar vacío");
+        if (estudianteDto.getEmail() == null || estudianteDto.getEmail().isBlank() || Utilidades2.validarEmail(estudianteDto.getEmail())) {
+            
+            if (estudianteDto.getNombre() == null || estudianteDto.getNombre().isEmpty()) {
+                throw new RatonDeBibliotecaException("El nombre no puede estar vacío");
+            }
+            
+            if (carnetDto.getFechaEmision() == null || carnetDto.getFechaVencimiento() == null) {
+                throw new RatonDeBibliotecaException("Las fechas no pueden estar vacías");
+            }
+
+            if (carnetDto.getFechaEmision().after(carnetDto.getFechaVencimiento())) {
+                throw new RatonDeBibliotecaException("La fecha de emisión no puede ser posterior a la fecha de vencimiento");
+            }
+            
+            Estudiante estudiante = new Estudiante(estudianteDto.getNombre());
+            estudiante.setCarnetBiblioteca(new CarnetBiblioteca(carnetDto.getFechaEmision(), carnetDto.getFechaVencimiento()));
+            dao.insertar(estudiante);
+
+        }else {
+            throw new RatonDeBibliotecaException("No, no, no... El email no es válido");
         }
-        if (carnetDto.getFechaEmision() == null || carnetDto.getFechaVencimiento() == null) {
-            throw new RatonDeBibliotecaException("Las fechas no pueden estar vacías");
-        }
-        if (carnetDto.getFechaEmision().after(carnetDto.getFechaVencimiento())) {
-            throw new RatonDeBibliotecaException("La fecha de emisión no puede ser posterior a la fecha de vencimiento");
-        }
-        Estudiante estudiante = new Estudiante(estudianteDto.getNombre());
-        estudiante.setCarnetBiblioteca(new CarnetBiblioteca(carnetDto.getFechaEmision(), carnetDto.getFechaVencimiento()));
-        dao.insertar(estudiante);
+        
+        
     }
 
     public List<EstudianteDTO> obtenerEstudiantes() {
@@ -50,5 +62,11 @@ public class BibliotecaService {
             dtos.add(new EstudianteDTO(e.getNombre()));
         }
         return dtos;
+    }
+    
+    private EstudianteDTO generaEstudianteDTO(Estudiante estudiante) {
+        return new EstudianteDTO(estudiante.getNombre(), estudiante.getApellidos(), estudiante.getEdad(), 
+                estudiante.getDni(), estudiante.getEmail(), new CarnetBibliotecaDTO(estudiante.getCarnetBiblioteca().getFechaEmision(), 
+                        estudiante.getCarnetBiblioteca().getFechaVencimiento()));
     }
 }

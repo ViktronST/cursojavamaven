@@ -22,6 +22,18 @@ public class Estudiante {
     @Column(name = "nombre", nullable = false, length = 50, unique = true)
     private String nombre;
 
+    @Column(name = "apellidos", length = 50)
+    private String apellidos;
+
+    @Column(name = "edad", nullable = false, length = 50)
+    private String edad;
+
+    @Column(name = "dni", nullable = false, length = 50, unique = true)
+    private String dni;
+
+    @Column(name = "email", length = 50, unique = true)
+    private String email;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "carnet_biblioteca_id")
     private CarnetBiblioteca carnetBiblioteca;
@@ -40,6 +52,15 @@ public class Estudiante {
 
     public Estudiante(String nombre, CarnetBiblioteca carnetBiblioteca) {
         this.nombre = nombre;
+        this.carnetBiblioteca = carnetBiblioteca;
+    }
+
+    public Estudiante(String nombre, String apellidos, String edad, String dni, String email, CarnetBiblioteca carnetBiblioteca) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.edad = edad;
+        this.dni = dni;
+        this.email = email;
         this.carnetBiblioteca = carnetBiblioteca;
     }
 
@@ -65,6 +86,30 @@ public class Estudiante {
 
     public void setCarnetBiblioteca(CarnetBiblioteca carnetBiblioteca) {
         this.carnetBiblioteca = carnetBiblioteca;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     

@@ -49,7 +49,11 @@ public class RatonDeBibliotecaFront {
     private EstudianteDTO creaEstudiante() {
         System.out.println("= = = = = = = = = =");
         System.out.println("Datos del Estudiante: ");
-        String nombre = Utilidades.pideDatoCadena("Nombre del usuario: ");
+        String nombre = Utilidades.pideDatoCadena("Nombre: ");
+        String apellidos = Utilidades.pideDatoCadena("Apellidos: ");
+        String edad = Utilidades.pideDatoCadena("Edad: ");
+        String dni = Utilidades.pideDatoCadena("DNI: ");
+        String email = Utilidades.pideDatoCadena("Email: ");
 
         System.out.println("= = = = = = = = = =");
         System.out.println("Carnet del Estudiante: ");
@@ -57,7 +61,7 @@ public class RatonDeBibliotecaFront {
         Date fechaVencimiento = Utilidades2.pideDatoFecha("Fecha de vencimiento: ");
 
         CarnetBibliotecaDTO carnetDto = new CarnetBibliotecaDTO(fechaEmision, fechaVencimiento);
-        EstudianteDTO estudianteDto = new EstudianteDTO(nombre);
+        EstudianteDTO estudianteDto = new EstudianteDTO(nombre, apellidos, edad, dni, email, carnetDto);
 
         servicio.insertarEstudiante(estudianteDto, carnetDto);
 
@@ -71,13 +75,20 @@ public class RatonDeBibliotecaFront {
         } else {
             System.out.println("Lista de estudiantes:");
             for (EstudianteDTO estudiante : estudiantes) {
-                System.out.println(estudiante.getNombre() + " - " + estudiante.getCarnetBibliotecaDTO().getFechaEmision() 
-                                    + " - " + estudiante.getCarnetBibliotecaDTO().getFechaVencimiento());
+                System.out.println(estudiante.getNombre() 
+                                + " - " + estudiante.getCarnetBibliotecaDTO().getFechaEmision() 
+                                + " - " + estudiante.getCarnetBibliotecaDTO().getFechaVencimiento());
             }
         }
     }
 
     private void obtenerPorEstudianteNombre() {
-
+        String nombre = Utilidades.pideDatoCadena("Nombre del estudiante: ");
+        EstudianteDTO estudiante = servicio.obtenerEstudiantePorNombre(nombre);
+        if (estudiante != null) {
+            System.out.println("Estudiante encontrado: " + estudiante.getNombre());
+        } else {
+            System.out.println("No se encontró el estudiante con nombre: " + nombre);
+        }
     }
 }

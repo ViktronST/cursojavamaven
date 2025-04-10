@@ -46,4 +46,36 @@ public class EstudianteDAOImpl implements EstudianteDAO {
         return null;
     }
 
+    @Override
+    public void actualizar(Estudiante estudiante) {
+        Session session = HibernateUtil.getSession();
+        List<Estudiante> listaEstudiantes = session.createQuery("from Estudiante", Estudiante.class).list();
+        if (listaEstudiantes.isEmpty()) {
+            System.out.println("No hay estudiantes en la base de datos.");
+        } else {
+            Transaction tx = session.beginTransaction();
+            session.update(estudiante);
+            tx.commit();
+        }
+    }
+
+    @Override
+    public void eliminar(Estudiante estudiante) {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(estudiante);
+        tx.commit();        
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Session session = HibernateUtil.getSession();
+        Transaction tx = session.beginTransaction();
+        Estudiante estudiante = session.get(Estudiante.class, id);
+        if (estudiante != null) {
+            session.delete(estudiante);
+        }
+        tx.commit();        
+    }
+
 }
