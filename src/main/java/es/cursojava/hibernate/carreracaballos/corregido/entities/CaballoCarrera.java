@@ -133,6 +133,14 @@ public class CaballoCarrera {
 		this.estaActivo = estaActivo;
 	}
 
+	public Jinete getJinete() {
+		return jinete;
+	}
+
+	public void setJinete(Jinete jinete) {
+		this.jinete = jinete;
+	}
+
 	@Override
 	public String toString() {
 		return "CaballoCarrera [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", velocidadMaxima="

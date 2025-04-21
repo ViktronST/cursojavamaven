@@ -7,6 +7,7 @@ import es.cursojava.hibernate.carreracaballos.corregido.dao.CaballoDAO;
 import es.cursojava.hibernate.carreracaballos.corregido.dao.CaballoDAOImpl;
 import es.cursojava.hibernate.carreracaballos.corregido.dto.CaballoDTO;
 import es.cursojava.hibernate.carreracaballos.corregido.entities.CaballoCarrera;
+import es.cursojava.hibernate.carreracaballos.corregido.entities.Jinete;
 import es.cursojava.hibernate.carreracaballos.corregido.exceptions.CaballoException;
 
 public class CarreraService {
@@ -41,8 +42,7 @@ public class CarreraService {
     }
 
     public CaballoDTO obtenerJineteCaballo(int idCaballo) {
-        
-        return;
+        return dao.obtenerJinete(idCaballo);
     }
 
     public void simularCarrera(List<CaballoDTO> caballosDTO) {
@@ -62,7 +62,6 @@ public class CarreraService {
                         break;
                     } else {
                         System.out.println("El caballo " + caballoDTO.getNombre() + " ha avanzado " + caballoDTO.getAvance() + " metros.");
-
                     }
                 }
 
@@ -108,5 +107,12 @@ public class CarreraService {
 
     public void eliminarCaballo(long id) {
         dao.eliminar(id);
+    }
+
+    public void actualizarJineteCaballo(long idCaballo, CaballoDTO caballoDTO) {
+        CaballoCarrera cc = dao.getCaballoPorId(idCaballo);
+        Jinete jinete = new Jinete(caballoDTO.getNombreJinete(), caballoDTO.getNacionalidadJinete());
+        cc.setJinete(jinete);
+        dao.actualizar(cc);
     }
 }

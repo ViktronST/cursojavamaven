@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import es.cursojava.hibernate.carreracaballos.corregido.dto.CaballoDTO;
 import es.cursojava.hibernate.carreracaballos.corregido.entities.CaballoCarrera;
 import es.cursojava.utiles.HibernateUtil;
 
@@ -55,5 +56,28 @@ public class CaballoDAOImpl implements CaballoDAO {
         Transaction tx = session.beginTransaction();
         session.merge(caballo);
         tx.commit();
+    }
+
+    @Override
+    public CaballoDTO obtenerJinete(long caballoId) {
+        Session session = HibernateUtil.getSession();
+        String queryJinete = "select" + 
+            "new es.cursojava.hibernate.carreracaballos.corregido.dto.CaballoDTO(cc.jinete.nombre, cc.jinete.nacionalidad)" + 
+            "from CaballoCarrera cc where id = :param1";
+
+        Query<CaballoDTO> query = session.createQuery(queryJinete, CaballoDTO.class);
+        query.setParameter("param1", caballoId);
+
+        CaballoDTO dto = query.uniqueResult();
+
+        return dto;
+    }
+
+    @Override
+    public CaballoCarrera getCaballoPorId(long id) {
+        Session session = HibernateUtil.getSession();
+        CaballoCarrera cc = session.find(CaballoCarrera.class, id);
+        
+        return cc;
     }
 }

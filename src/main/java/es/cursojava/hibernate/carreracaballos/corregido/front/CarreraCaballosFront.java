@@ -4,6 +4,7 @@ import java.util.List;
 
 import es.cursojava.hibernate.carreracaballos.corregido.dto.CaballoDTO;
 import es.cursojava.hibernate.carreracaballos.corregido.services.CarreraService;
+import es.cursojava.utiles.Utilidades;
 import es.cursojava.utiles.Utilidades2;
 
 public class CarreraCaballosFront {
@@ -111,6 +112,19 @@ public class CarreraCaballosFront {
     }
 
     private void cambiarJinete (){
-        
+        long idCaballo = Utilidades.pideDatoNumerico("Introduce id caballo a para actualizar su jinete: ");
+
+        CaballoDTO caballoDTO = servicio.obtenerJineteCaballo(idCaballo);
+        System.out.println("El jinete actual es: ");
+        System.out.println("\t" + caballoDTO.getNombreJinete());
+        System.out.println("\t" + caballoDTO.getNacionalidadJinete());
+
+        String nombreJinete = Utilidades2.pideDatoCadena("Nombre del jinete: ");
+        String nacionalidadJinete = Utilidades2.pideDatoCadena("Nacionalidad del jinete: ");
+        caballoDTO.setNombreJinete(nombreJinete);
+        caballoDTO.setNacionalidadJinete(nacionalidadJinete);
+
+        servicio.actualizarJineteCaballo(idCaballo, caballoDTO);
+
     }
 }

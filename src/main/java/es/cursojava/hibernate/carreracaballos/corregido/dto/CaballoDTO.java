@@ -85,6 +85,14 @@ public class CaballoDTO {
         this.nombreJinete = nombreJinete;
     }
 
+    public String getNacionalidadJinete() {
+        return nacionalidadJinete;
+    }
+
+    public void setNacionalidadJinete(String nacionalidadJinete) {
+        this.nacionalidadJinete = nacionalidadJinete;
+    }
+
     @Override
     public String toString() {
         return nombre + " | Edad: " + edad + ", Velocidad: " + velocidadMaxima +

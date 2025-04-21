@@ -24,6 +24,11 @@ public class Jinete {
     public Jinete() {
     }
 
+    public Jinete(String nombre, String nacionalidad) {
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+    }
+
     public Jinete(long id, String nombre, String nacionalidad) {
         this.id = id;
         this.nombre = nombre;
