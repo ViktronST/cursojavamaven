@@ -14,7 +14,7 @@ public class Jinete {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nombre_jinete", nullable = false, length = 20)
+    @Column(name = "nombre_jinete", length = 20)
     private String nombre;
 
     @Column(name= "nacionalidad", length = 20)

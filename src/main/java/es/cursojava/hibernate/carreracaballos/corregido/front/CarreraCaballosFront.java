@@ -27,10 +27,10 @@ public class CarreraCaballosFront {
             
             switch (opcion) {
                 case 1:
-                    creaCaballo();
+                    creaCaballoConJinete();
                     break;
                 case 2:
-                    mostrarCaballos();
+                    mostrarCaballosConJinetes();
                     break;
                 case 3:
                     iniciarCarrera();
@@ -66,22 +66,22 @@ public class CarreraCaballosFront {
         return caballoDto;
     }
 
-    // private CaballoDTO creaCaballoConJinete (){
+    private CaballoDTO creaCaballoConJinete (){
 
-    //     String nombre = Utilidades2.pideDatoCadena("Nombre: ");
-    //     int edad = Utilidades2.pideDatoNumerico("edad: ");
-    //     double velocidad = Utilidades2.pideDatoDecimal("Velocidad máxima (km/h): ");
-    //     int triunfos = Utilidades2.pideDatoNumerico("Número de triunfos: : ");
-    //     double experiencia = Utilidades2.pideDatoDecimal("Experiencia (0.0 a 10.0): ");
-    //     String activo = Utilidades2.pideDatoCadena("¿Está activo? ");
-    //     String jinete = Utilidades2.pideDatoCadena("Nombre del jinete: ");
-    //     String nacionalidad = Utilidades2.pideDatoCadena("Nacionalidad del jinete: ");
+        String nombre = Utilidades2.pideDatoCadena("Nombre: ");
+        int edad = Utilidades2.pideDatoNumerico("edad: ");
+        double velocidad = Utilidades2.pideDatoDecimal("Velocidad máxima (km/h): ");
+        int triunfos = Utilidades2.pideDatoNumerico("Número de triunfos: : ");
+        double experiencia = Utilidades2.pideDatoDecimal("Experiencia (0.0 a 10.0): ");
+        String activo = Utilidades2.pideDatoCadena("¿Está activo? ");
+        String jinete = Utilidades2.pideDatoCadena("Nombre del jinete: ");
+        String nacionalidad = Utilidades2.pideDatoCadena("Nacionalidad del jinete: ");
 
-    //     CaballoDTO caballoDto = new CaballoDTO(nombre, edad, velocidad, triunfos, experiencia, 
-    //                 activo.equalsIgnoreCase("si"), jinete, nacionalidad);
-    //     servicio.insertarCaballo(caballoDto);
-    //     return caballoDto;
-    // }
+        CaballoDTO caballoDto = new CaballoDTO(nombre, edad, velocidad, triunfos, experiencia, 
+                    activo.equalsIgnoreCase("si"), jinete, nacionalidad);
+        servicio.insertarCaballo(caballoDto);
+        return caballoDto;
+    }
 
     private void mostrarCaballos (){
         List<CaballoDTO> caballos = servicio.obtenerCaballos(false);
@@ -103,7 +103,9 @@ public class CarreraCaballosFront {
     private void eliminarCaballo (){
         // Abrimos la session con este método.
         // Así no hará falta que al eliminar se haga un select para comprobar que existe el caballo.
-        mostrarCaballos();
+        
+        // mostrarCaballos();
+        mostrarCaballosConJinetes();
 
         // Sin el método anterior, hibernate hace un select para comprobar que existe el caballo.
         int id = Utilidades2.pideDatoNumerico("Elige el id del caballo a eliminar: ");

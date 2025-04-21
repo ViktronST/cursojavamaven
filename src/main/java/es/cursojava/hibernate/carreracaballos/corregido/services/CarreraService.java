@@ -20,6 +20,7 @@ public class CarreraService {
             throw new CaballoException("Velocidad no permitida 30-80" + caballoDto.getVelocidadMaxima());
         }
 
+        Jinete jinete = new Jinete(caballoDto.getNombreJinete(), caballoDto.getNacionalidadJinete());
         CaballoCarrera caballo = new CaballoCarrera(
             caballoDto.getNombre(),
             caballoDto.getEdad(),
@@ -27,6 +28,7 @@ public class CarreraService {
             caballoDto.getNumeroDeTriunfos(),
             caballoDto.getExperiencia(), 
             caballoDto.isActivo());
+        caballo.setJinete(jinete);
         dao.insertar(caballo);
     }
 
@@ -41,7 +43,7 @@ public class CarreraService {
         return generaDTO(caballos);
     }
 
-    public CaballoDTO obtenerJineteCaballo(int idCaballo) {
+    public CaballoDTO obtenerJineteCaballo(long idCaballo) {
         return dao.obtenerJinete(idCaballo);
     }
 
@@ -109,10 +111,16 @@ public class CarreraService {
         dao.eliminar(id);
     }
 
-    public void actualizarJineteCaballo(long idCaballo, CaballoDTO caballoDTO) {
+    public void actualizarJineteCaballo(Long idCaballo, CaballoDTO caballoDTO){
+        //Obtengo el caballo a actualizar
         CaballoCarrera cc = dao.getCaballoPorId(idCaballo);
+
+        //Genero el jinete a partir de la información del DTO
         Jinete jinete = new Jinete(caballoDTO.getNombreJinete(), caballoDTO.getNacionalidadJinete());
+
+        //Asigno el nuevo jinete al caballo
         cc.setJinete(jinete);
+
         dao.actualizar(cc);
     }
 }
