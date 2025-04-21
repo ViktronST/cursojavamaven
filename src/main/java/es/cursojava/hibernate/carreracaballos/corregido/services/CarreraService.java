@@ -24,7 +24,8 @@ public class CarreraService {
             caballoDto.getEdad(),
             caballoDto.getVelocidadMaxima(),
             caballoDto.getNumeroDeTriunfos(),
-            caballoDto.getExperiencia(), caballoDto.isActivo() );
+            caballoDto.getExperiencia(), 
+            caballoDto.isActivo());
         dao.insertar(caballo);
     }
 
@@ -37,6 +38,11 @@ public class CarreraService {
         }
         
         return generaDTO(caballos);
+    }
+
+    public CaballoDTO obtenerJineteCaballo(int idCaballo) {
+        
+        return;
     }
 
     public void simularCarrera(List<CaballoDTO> caballosDTO) {

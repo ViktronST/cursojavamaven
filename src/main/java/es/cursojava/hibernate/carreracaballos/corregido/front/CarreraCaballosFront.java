@@ -38,6 +38,9 @@ public class CarreraCaballosFront {
                     eliminarCaballo();
                     break;
                 case 5:
+                    cambiarJinete();
+                    break;
+                case 6:
                     System.out.println("Aaaadios!");;
                     break;
                 default:
@@ -62,9 +65,34 @@ public class CarreraCaballosFront {
         return caballoDto;
     }
 
+    // private CaballoDTO creaCaballoConJinete (){
+
+    //     String nombre = Utilidades2.pideDatoCadena("Nombre: ");
+    //     int edad = Utilidades2.pideDatoNumerico("edad: ");
+    //     double velocidad = Utilidades2.pideDatoDecimal("Velocidad máxima (km/h): ");
+    //     int triunfos = Utilidades2.pideDatoNumerico("Número de triunfos: : ");
+    //     double experiencia = Utilidades2.pideDatoDecimal("Experiencia (0.0 a 10.0): ");
+    //     String activo = Utilidades2.pideDatoCadena("¿Está activo? ");
+    //     String jinete = Utilidades2.pideDatoCadena("Nombre del jinete: ");
+    //     String nacionalidad = Utilidades2.pideDatoCadena("Nacionalidad del jinete: ");
+
+    //     CaballoDTO caballoDto = new CaballoDTO(nombre, edad, velocidad, triunfos, experiencia, 
+    //                 activo.equalsIgnoreCase("si"), jinete, nacionalidad);
+    //     servicio.insertarCaballo(caballoDto);
+    //     return caballoDto;
+    // }
+
     private void mostrarCaballos (){
         List<CaballoDTO> caballos = servicio.obtenerCaballos(false);
         caballos.forEach(System.out::println);
+    }
+
+    private void mostrarCaballosConJinetes (){
+        List<CaballoDTO> caballos = servicio.obtenerCaballos(false);
+        for (CaballoDTO caballoDTO : caballos) {
+            System.out.println(caballoDTO.getNombre());
+            System.out.println(caballoDTO.getNombreJinete());
+        }
     }
 
     private void iniciarCarrera (){
@@ -80,5 +108,9 @@ public class CarreraCaballosFront {
         int id = Utilidades2.pideDatoNumerico("Elige el id del caballo a eliminar: ");
         servicio.eliminarCaballo(id);
         System.out.println("Caballo con id " + id + " eliminado correctamente");
+    }
+
+    private void cambiarJinete (){
+        
     }
 }

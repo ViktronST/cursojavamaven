@@ -8,6 +8,8 @@ public class CaballoDTO {
     private double experiencia;
     private boolean activo;
     private double avance;
+    private String nombreJinete;
+    private String nacionalidadJinete;
 
     public CaballoDTO(String nombre, int edad, double velocidadMaxima, int numeroDeTriunfos, double experiencia) {
         this.nombre = nombre;
@@ -18,8 +20,7 @@ public class CaballoDTO {
         this.activo = true;
     }
 
-    public CaballoDTO(String nombre, int edad, double velocidadMaxima, int numeroDeTriunfos, double experiencia,
-            boolean activo) {
+    public CaballoDTO(String nombre, int edad, double velocidadMaxima, int numeroDeTriunfos, double experiencia, boolean activo) {
         this.nombre = nombre;
         this.edad = edad;
         this.velocidadMaxima = velocidadMaxima;
@@ -28,7 +29,17 @@ public class CaballoDTO {
         this.activo = activo;
     }
 
-
+    public CaballoDTO(String nombre, int edad, double velocidadMaxima, int numeroDeTriunfos, double experiencia,
+            boolean activo, String nombreJinete, String nacionalidadJinete) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.velocidadMaxima = velocidadMaxima;
+        this.numeroDeTriunfos = numeroDeTriunfos;
+        this.experiencia = experiencia;
+        this.activo = activo;
+        this.nombreJinete = nombreJinete;
+        this.nacionalidadJinete = nacionalidadJinete;
+    }
     
     public String getNombre() {
         return nombre;
@@ -58,8 +69,6 @@ public class CaballoDTO {
         this.avance = avance;
     }
 
-
-
     public boolean isActivo() {
         return activo;
     }
@@ -68,9 +77,19 @@ public class CaballoDTO {
         this.activo = activo;
     }
 
+    public String getNombreJinete() {
+        return nombreJinete;
+    }
+
+    public void setNombreJinete(String nombreJinete) {
+        this.nombreJinete = nombreJinete;
+    }
+
     @Override
     public String toString() {
         return nombre + " | Edad: " + edad + ", Velocidad: " + velocidadMaxima +
-                " km/h, Triunfos: " + numeroDeTriunfos + ", Exp: " + experiencia;
+                " km/h, Triunfos: " + numeroDeTriunfos + ", Exp: " + experiencia +
+                ", Estado: " + activo + ", Avance: " + avance + ", Jinete: " + nombreJinete +
+                ", Nacionalidad: " + nacionalidadJinete;
     }
 }
