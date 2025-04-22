@@ -1,11 +1,17 @@
 package es.cursojava.hibernate.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /*
@@ -37,17 +43,25 @@ public class Cliente {
     @Column(nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Pedido> listaPedido = new ArrayList<>();
 
-    
+    // Constructores
+    public Cliente() {
+    }
 
     public Cliente(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
     }
 
-    public Cliente() {
+    public Cliente(String nombre, String email, List<Pedido> listaPedido) {
+        this.nombre = nombre;
+        this.email = email;
+        this.listaPedido = listaPedido;
     }
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -72,5 +86,12 @@ public class Cliente {
         this.email = email;
     }
 
+    public List<Pedido> getListaPedido() {
+        return listaPedido;
+    }
+
+    public void setListaPedido(List<Pedido> listaPedido) {
+        this.listaPedido = listaPedido;
+    }
     
 }

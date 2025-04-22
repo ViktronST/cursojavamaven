@@ -23,7 +23,6 @@ public class Autor {
     }
 
     public Autor( String name, List<Book> books) {
-
         this.name = name;
         this.books = books;
     }

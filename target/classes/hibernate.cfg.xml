@@ -46,6 +46,7 @@
         <!-- <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca"/> -->
 
         <mapping class="es.cursojava.hibernate.entities.Cliente"/>
+        <mapping class="es.cursojava.hibernate.entities.Pedido"/>
 
         <mapping class="es.cursojava.hibernate.entities.Autor"/>
         <mapping class="es.cursojava.hibernate.entities.Book"/>
