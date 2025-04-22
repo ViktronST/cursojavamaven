@@ -49,7 +49,7 @@ public class CaballoCarrera {
 	private boolean estaActivo;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "FK_JINETE")
+	@JoinColumn(name = "fk_jinete")
 	private Jinete jinete;
 
 	public CaballoCarrera() {

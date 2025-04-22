@@ -24,6 +24,7 @@ public class CaballoDAOImpl implements CaballoDAO {
     public List<CaballoCarrera> obtenerTodos() {
         Session session = HibernateUtil.getSession();
         List<CaballoCarrera> lista = session.createQuery("from CaballoCarrera", CaballoCarrera.class).list();
+
         return lista;
     }
 
@@ -80,4 +81,19 @@ public class CaballoDAOImpl implements CaballoDAO {
         
         return cc;
     }
+
+    @Override
+    public List<CaballoCarrera> obtenerCaballosPorNacionalidadJinete(String nacionalidad) {
+        Session session = HibernateUtil.getSession();
+        String queryNacioonalidadJinete = "from CaballoCarrera cc where cc.jinete.nacionalidad =: param1";
+
+        Query<CaballoCarrera> query = session.createQuery(queryNacioonalidadJinete, CaballoCarrera.class);
+        query.setParameter("param1", nacionalidad);
+        
+        List<CaballoCarrera> caballos = query.list();
+
+        return caballos;
+    }
+
+    
 }

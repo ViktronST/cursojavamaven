@@ -35,12 +35,12 @@
         create-only:	Crea el esquema al iniciar, pero no lo elimina al cerrar (Hibernate 5.5+). -->
         <!-- Clase mapeada -->
         <mapping class="es.cursojava.hibernate.ejemplos.entities.persona.Persona"/>
-        <mapping class="es.cursojava.hibernate.carreracaballos.CaballoCarrera"/>
-        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.CarreraCaballosMain"/>
+        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.entities.CaballoCarrera"/>
+        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.entities.Jinete"/>
         <mapping class="es.cursojava.hibernate.unoauno.Usuario"/>
         <mapping class="es.cursojava.hibernate.unoauno.Direccion"/>
-        <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.Estudiante"/>
-        <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca"/>
+        <!-- <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.Estudiante"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca"/> -->
 
     </session-factory>
 </hibernate-configuration>
