@@ -8,21 +8,22 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_PEDIDOS")
+@Table(name = "TB_PEDIDOS", indexes = { @Index(name = "idx_fecha_pedido", columnList = "fecha_pedido") })
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPedido;
 
-    @Column(name = "descripcion_pedido", nullable = false, length = 50)
+    @Column(name = "descripcion_pedido", nullable = false, length = 100)
     private String descripcionPedido;
 
-    @Column(name = "fecha_pedido", nullable = false)
+    @Column(nullable = false)
     private LocalDate fechaPedido;
 
     @Column(name = "coste_pedido", nullable = false)
@@ -79,5 +80,14 @@ public class Pedido {
     public void setCostePedido(double costePedido) {
         this.costePedido = costePedido;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     
 }

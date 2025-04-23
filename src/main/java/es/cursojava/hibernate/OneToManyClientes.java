@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import es.cursojava.hibernate.dto.PedidoDTO;
 import es.cursojava.hibernate.entities.Cliente;
 import es.cursojava.hibernate.entities.Pedido;
 import es.cursojava.utiles.HibernateUtil;
 
 public class OneToManyClientes {
     public static void main(String[] args) {
-
-
         // Abrir sesión
         Session session = HibernateUtil.getSession();
 
@@ -22,12 +21,16 @@ public class OneToManyClientes {
 
             // Crear cliente
             Cliente cliente1 = new Cliente();
-            Cliente cliente2 = new Cliente();
-            Cliente cliente3 = new Cliente();
-
             cliente1.setNombre("Eduardo Mendoza Gimenez");
+            cliente1.setEmail("elEdus@asdas.es");
+
+            Cliente cliente2 = new Cliente();
             cliente2.setNombre("Juan Carlos III");
+            cliente2.setEmail("reydeEspañaIII@realeza.es");
+
+            Cliente cliente3 = new Cliente();
             cliente3.setNombre("EL PAPA");
+            cliente3.setEmail("HabemusPapam@elvaticano.com");
 
             // Crear pedidos
             Pedido pedido11 = new Pedido();
@@ -90,7 +93,7 @@ public class OneToManyClientes {
             pedido35.setFechaPedido(LocalDate.of(2006, 6, 6));
             pedido35.setCostePedido(150234.99);
 
-            // Agregar libros al autor
+            // Agregar pedidos al cliente
             cliente1.getListaPedido().add(pedido11);
             cliente1.getListaPedido().add(pedido12);
             cliente1.getListaPedido().add(pedido13);
@@ -106,7 +109,23 @@ public class OneToManyClientes {
             cliente3.getListaPedido().add(pedido34);
             cliente3.getListaPedido().add(pedido35);
 
-            // Guardar autor (Cascade.ALL guarda los libros también)
+            // Agregar cliente a los pedidos
+            pedido11.setCliente(cliente1);
+            pedido12.setCliente(cliente1);
+            pedido13.setCliente(cliente1);
+
+            pedido21.setCliente(cliente2);
+            pedido22.setCliente(cliente2);
+            pedido23.setCliente(cliente2);
+            pedido24.setCliente(cliente2);
+
+            pedido31.setCliente(cliente3);
+            pedido32.setCliente(cliente3);
+            pedido33.setCliente(cliente3);
+            pedido34.setCliente(cliente3);
+            pedido35.setCliente(cliente3);
+
+            // Guardar cliente (Cascade.ALL guarda los libros también)
             session.persist(cliente1);
             session.persist(cliente2);
             session.persist(cliente3);
@@ -117,6 +136,7 @@ public class OneToManyClientes {
             // Nueva sesión para consultar
             session.beginTransaction();
 
+            // Consulta VERSION VAGO
             List<Cliente> listaCliente = session.createQuery("from Cliente", Cliente.class).getResultList();
 
             for (Cliente cliente : listaCliente) {
@@ -126,7 +146,45 @@ public class OneToManyClientes {
                 }
             }
 
+            System.out.println("=======================================");
+
+            for (Cliente c : listaCliente) {
+                System.out.println("Email: " + c.getEmail());
+            
+                double sumaCostes = 0;
+                List<Pedido> pedidos = c.getListaPedido();
+            
+                for (Pedido p : pedidos) {
+                    sumaCostes += p.getCostePedido();
+                }
+            
+                double mediaCoste = pedidos.isEmpty() ? 0 : sumaCostes / pedidos.size();
+                System.out.println("  Media del coste de pedidos: " + String.format("%.2f", mediaCoste));
+            }
+
+            System.out.println("=======================================");
+
+            for (Cliente cl : listaCliente) {
+                List<Pedido> pedidos = cl.getListaPedido();
+                for (Pedido pd : pedidos) {
+                    System.out.println("Fecha: " +  pd.getFechaPedido());
+                    System.out.println("\tCoste: " + pd.getCostePedido());
+                }
+            }
+            
+            // Commit
             session.getTransaction().commit();
+
+            // Nueva sesión para consultar
+            session.beginTransaction();
+
+            // Consulta
+            PedidoDTO pedidoDto = session.createQuery("select SUM(coste) from PedidoDTO where fechaPedido=",
+                                                     PedidoDTO.class).getSingleResult(); 
+
+            // Commit
+            session.getTransaction().commit();
+
         } finally {
             session.close();
         }
