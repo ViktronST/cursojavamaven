@@ -10,8 +10,8 @@ public class FechaRandom {
         long fin = new Date().getTime();
 
         // Fecha aleatoria
-        long random = ThreadLocalRandom.current().nextLong(inicio, fin);
-        Date fechaAleatoria = new Date(random);
+        long randomDate = ThreadLocalRandom.current().nextLong(inicio, fin);
+        Date fechaAleatoria = new Date(randomDate);
 
         System.out.println("Fecha aleatoria: " + fechaAleatoria);
     }
