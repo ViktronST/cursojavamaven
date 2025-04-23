@@ -181,8 +181,13 @@ public class OneToManyClientes {
             session.beginTransaction();
 
             // Consulta
-            PedidoDTO pedidoDto = session.createQuery("select SUM(coste) from PedidoDTO where fechaPedido=",
-                                                     PedidoDTO.class).getSingleResult(); 
+            // PedidoDTO pedidoDto = session.createQuery("select c.email, AVG(p.totalPedidos) from Cliente c join Pedido p" + 
+            //                                              "where p.cliente.email =: param1 " + 
+            //                                              "GROUP BY c.cliente.email",
+            //                                              PedidoDTO.class).getSingleResult();
+            PedidoDTO pedidoDto = session.createQuery("select p.cliente.email, AVG(p.pedidos) from Pedido p" +
+                                                        "GROUP BY c.cliente.email",
+                                                        PedidoDTO.class).getSingleResult(); 
 
             // Commit
             session.getTransaction().commit();
@@ -191,8 +196,9 @@ public class OneToManyClientes {
             session.beginTransaction();
 
             // Consulta
-            PedidoDTO pedido2Dto = session.createQuery("select SUM(coste) from PedidoDTO where fechaPedido=",
-                                                     PedidoDTO.class).getSingleResult(); 
+            PedidoDTO pedido2Dto = session.createQuery("select SUM(p.costePedidos) from Pedido p" + 
+                                                        "where p.fechaPedido =: param1",
+                                                        PedidoDTO.class).getSingleResult(); 
 
             // Commit
             session.getTransaction().commit();
