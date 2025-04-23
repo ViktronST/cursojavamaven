@@ -1,5 +1,7 @@
 package es.cursojava.hibernate;
 
+import java.security.Timestamp;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class OneToManyClientes {
     public static void main(String[] args) {
         // Abrir sesión
         Session session = HibernateUtil.getSession();
-
+        
         try {
             // Iniciar transacción
             session.beginTransaction();
@@ -180,6 +182,16 @@ public class OneToManyClientes {
 
             // Consulta
             PedidoDTO pedidoDto = session.createQuery("select SUM(coste) from PedidoDTO where fechaPedido=",
+                                                     PedidoDTO.class).getSingleResult(); 
+
+            // Commit
+            session.getTransaction().commit();
+
+            // Nueva sesión para consultar
+            session.beginTransaction();
+
+            // Consulta
+            PedidoDTO pedido2Dto = session.createQuery("select SUM(coste) from PedidoDTO where fechaPedido=",
                                                      PedidoDTO.class).getSingleResult(); 
 
             // Commit

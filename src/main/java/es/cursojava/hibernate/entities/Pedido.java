@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB_PEDIDOS", indexes = { @Index(name = "idx_fecha_pedido", columnList = "fecha_pedido") })
+@Table(name = "TB_PEDIDOS_IDX", indexes = { @Index(name = "idx_fecha_pedido", columnList = "fecha_pedido") })
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

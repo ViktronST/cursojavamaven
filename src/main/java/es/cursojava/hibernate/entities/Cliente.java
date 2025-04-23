@@ -29,7 +29,7 @@ import jakarta.persistence.Table;
  */
 
 @Entity
-@Table(name = "TB_CLIENTES", indexes = { @Index(name = "idx_email", columnList = "email") })
+@Table(name = "TB_CLIENTES_IDX", indexes = { @Index(name = "idx_email", columnList = "email") })
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

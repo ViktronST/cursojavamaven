@@ -34,22 +34,22 @@
         drop:	Elimina el esquema sin crearlo de nuevo (raro de usar).
         create-only:	Crea el esquema al iniciar, pero no lo elimina al cerrar (Hibernate 5.5+). -->
         <!-- Clase mapeada -->
-        <mapping class="es.cursojava.hibernate.ejemplos.entities.persona.Persona"/>
+        <!-- <mapping class="es.cursojava.hibernate.dto.persona.Persona"/> -->
 
-        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.entities.CaballoCarrera"/>
-        <mapping class="es.cursojava.hibernate.carreracaballos.corregido.entities.Jinete"/>
+        <!-- <mapping class="es.cursojava.hibernate.ejercicios.carreracaballos.corregido.entities.CaballoCarrera"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.ejercicios.carreracaballos.corregido.entities.Jinete"/> -->
 
-        <mapping class="es.cursojava.hibernate.unoauno.Usuario"/>
-        <mapping class="es.cursojava.hibernate.unoauno.Direccion"/>
+        <!-- <mapping class="es.cursojava.hibernate.unoauno.Usuario"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.unoauno.Direccion"/> -->
 
-        <!-- <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.Estudiante"/> -->
-        <!-- <mapping class="es.cursojava.hibernate.ratondebiblioteca.entities.CarnetBiblioteca"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.ejercicios.ratondebiblioteca.entities.Estudiante"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.ejercicios.ratondebiblioteca.entities.CarnetBiblioteca"/> -->
 
         <mapping class="es.cursojava.hibernate.entities.Cliente"/>
         <mapping class="es.cursojava.hibernate.entities.Pedido"/>
 
-        <mapping class="es.cursojava.hibernate.entities.Autor"/>
-        <mapping class="es.cursojava.hibernate.entities.Book"/>
+        <!-- <mapping class="es.cursojava.hibernate.entities.Autor"/> -->
+        <!-- <mapping class="es.cursojava.hibernate.entities.Book"/> -->
 
     </session-factory>
 </hibernate-configuration>

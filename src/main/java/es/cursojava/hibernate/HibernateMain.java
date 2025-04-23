@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import es.cursojava.hibernate.ejemplos.entities.persona.Persona;
+import es.cursojava.hibernate.entities.Persona;
 
 public class HibernateMain {
     public static void main(String[] args) {
